@@ -21,7 +21,7 @@ def on_leave(data):
     leave_room(room)
     send(username + ' has left the room.', to=room)
 
-@socketio.on('message')
+@socketio.on('sync')
 def handle_message(data):
     
     print('received message: ' + data)
@@ -62,13 +62,6 @@ def handle_connect(data):
                 
                 
     print('-'*20,'\n',userlist,'\n','-'*20)
-# @socketio.on('json')
-# def handle_json(json):
-#     print('received json: ' + str(json))
-    
-@socketio.on('my event')
-def handle_my_custom_event(json):
-    print('received json: ' + str(json))
 
 @socketio.on('disconnect')
 def handle_disconnect():

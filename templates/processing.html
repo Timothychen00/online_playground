@@ -12,17 +12,6 @@
 </head>
 
 <body class="d-flex justify-content-center" style="padding-top: 100px;">
-  <!-- Button trigger modal -->
-
-  <!-- <div class="container-fluid">
-    <div class="row justify-content-center">
-      <div class="col-12">
-        <canvas id="canvas" class="vh-100 vw-100" >
-
-        </canvas>
-      </div>
-    </div>
-  </div> -->
   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="button">
     Launch demo modal
   </button>
@@ -35,7 +24,7 @@
       <div class="modal-content">
         <div class="modal-body">
           Input Username
-          
+
           <input type="text" class="form-control" id="username">
         </div>
         <div class="modal-footer">
@@ -45,125 +34,14 @@
       </div>
     </div>
   </div>
-  <script>
-    let x, y, speedx, speedy;
-    let kby;
-    let kscore, mscore, flg;
-
-    function choice() {
-      const choose = [1, -1];
-      return choose[Math.floor(Math.random() * 2)];
-    }
-
-    function setup() {
-      createCanvas(800, 600);
-      //canvas.parent('canvas');
-      x = width / 2;
-      y = height / 2;
-      speedx = Math.floor(Math.random() * 3 + 5) * choice();
-      speedy = Math.floor(Math.random() * 3 + 5) * choice();
-      kby = height / 2;
-      kscore = 0;
-      mscore = 0;
-      flg = 0;
-    }
-
-    function draw() {
-      background(133, 157, 201);
-
-      noFill();
-      strokeWeight(6);
-      stroke(32, 72, 89);
-      rect(4, 4, width - 8, height - 8);
-      line(width / 2, 0, width / 2, height);
-
-      stroke(76, 214, 245);
-      fill(76, 214, 245);
-      ellipse(x, y, 30, 30);
-
-      x = x + speedx;
-      y = y + speedy;
-      if (y > height || y < 0) {
-        speedy = -speedy;
-      }
-      fill(215, 242, 10);
-      stroke(215, 242, 10);
-      rect(width - 10, mouseY, 10, 160);
-
-      if (x >= width - 10 && (y >= mouseY && y <= mouseY + 160)) {
-        speedx = -speedx;
-      } else if (x > width) {
-        if (flg === 0) {
-          kscore++;
-          flg = 1;
-        }
-      }
-
-      rect(0, kby, 10, 160);
-
-      if (keyIsPressed) {
-        if (key === 'w' && kby > 0) kby -= 10;
-        if (key === 's' && kby < height - 160) kby += 10;
-      }
-
-      if (x <= 10 && (y >= kby && y <= kby + 160)) {
-        speedx = -speedx;
-      } else if (x < 0) {
-        if (flg === 0) {
-          mscore++;
-          flg = 1;
-        }
-      }
-
-      fill(35, 36, 32);
-      stroke(35, 36, 32);
-      textSize(128);
-      text(kscore, width / 2 - 128, 120);
-      text(mscore, width / 2 + 64, 120);
-    }
-
-    function mousePressed() {
-      x = width / 2;
-      y = height / 2;
-      speedx = Math.floor(Math.random() * 3 + 5) * choice();
-      speedy = Math.floor(Math.random() * 3 + 5) * choice();
-      flg = 0;
-    }
-  </script>
+  <script src="/static/js/game.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
     integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
     crossorigin="anonymous"></script>
-  <script type="text/javascript" charset="utf-8">
-    var socket = io({autoConnect:false});
-
-    socket.on('connect', function () {
-      let username = document.getElementById('username').value;
-      if (username!=""){
-        socket.emit('join', username);
-        document.getElementById('close').click();
-        document.getElementById('defaultCanvas0').style.display='block';
-        document.getElementById('button').style.display='none';
-        //socket.to("1").emit('my event', {speedx:speedx,speedy:speedy,x:x,y:y,kby,kby });
-      }
-    });
-    socket.on('sync', function (e) {
-      console.log(e);
-      alert(1);
-      //socket.join("1");
-      //socket.emit('my event', {speedx:speedx,speedy:speedy,x:x,y:y,kby,kby });
-      //socket.to("1").emit('my event', {speedx:speedx,speedy:speedy,x:x,y:y,kby,kby });
-    });
-    function connect(){
-      //alert(1);
-      socket.connect();
-    }
-
-
-
-  </script>
+    <script src="/static/js/socket.js"></script>
   <script>
-    window.onload=()=>{
-      document.getElementById('defaultCanvas0').style.display='none';
+    window.onload = () => {
+      document.getElementById('defaultCanvas0').style.display = 'none';
 
     }
   </script>
