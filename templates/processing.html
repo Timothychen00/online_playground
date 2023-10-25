@@ -6,12 +6,45 @@
   <title>Pong Game</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
 </head>
 
 <body class="d-flex justify-content-center" style="padding-top: 100px;">
+  <!-- Button trigger modal -->
 
+  <!-- <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <canvas id="canvas" class="vh-100 vw-100" >
+
+        </canvas>
+      </div>
+    </div>
+  </div> -->
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="button">
+    Launch demo modal
+  </button>
+  <hr>
+  <br>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          Input Username
+          
+          <input type="text" class="form-control" id="username">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="close">Close</button>
+          <button type="button" class="btn btn-primary" onclick="connect()">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <script>
     let x, y, speedx, speedy;
     let kby;
@@ -24,6 +57,7 @@
 
     function setup() {
       createCanvas(800, 600);
+      //canvas.parent('canvas');
       x = width / 2;
       y = height / 2;
       speedx = Math.floor(Math.random() * 3 + 5) * choice();
@@ -96,13 +130,46 @@
       flg = 0;
     }
   </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
-<script type="text/javascript" charset="utf-8">
-    var socket = io();
-    socket.on('connect', function() {
-        socket.emit('my event', {data: 'I\'m connected!'});
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
+    integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
+    crossorigin="anonymous"></script>
+  <script type="text/javascript" charset="utf-8">
+    var socket = io({autoConnect:false});
+
+    socket.on('connect', function () {
+      let username = document.getElementById('username').value;
+      if (username!=""){
+        socket.emit('join', username);
+        document.getElementById('close').click();
+        document.getElementById('defaultCanvas0').style.display='block';
+        document.getElementById('button').style.display='none';
+        //socket.to("1").emit('my event', {speedx:speedx,speedy:speedy,x:x,y:y,kby,kby });
+      }
     });
-</script>
+    socket.on('sync', function (e) {
+      console.log(e);
+      alert(1);
+      //socket.join("1");
+      //socket.emit('my event', {speedx:speedx,speedy:speedy,x:x,y:y,kby,kby });
+      //socket.to("1").emit('my event', {speedx:speedx,speedy:speedy,x:x,y:y,kby,kby });
+    });
+    function connect(){
+      //alert(1);
+      socket.connect();
+    }
+
+
+
+  </script>
+  <script>
+    window.onload=()=>{
+      document.getElementById('defaultCanvas0').style.display='none';
+
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>
