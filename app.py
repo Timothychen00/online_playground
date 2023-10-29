@@ -1,6 +1,6 @@
 from flask import Flask, render_template,request
 from flask_socketio import SocketIO,send,emit,join_room, leave_room
-
+import random
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 app.config['DEBUG']=True
@@ -12,19 +12,19 @@ temp_id=None
 @app.route("/")
 def home():
     return render_template("processing.html")
-    
-
-@socketio.on('leave')
-def on_leave(data):
-    username = data['username']
-    room = data['room']
-    leave_room(room)
-    send(username + ' has left the room.', to=room)
 
 @socketio.on('sync')
 def handle_message(data):
-    
-    print('received message: ' + data)
+    global userlist
+    data['status']='sync'
+    for index in range(len(userlist)):
+        if userlist[index]['sid']==request.sid:
+            if data['player']==1:
+                emit('sync',data,to=userlist[index+1]['sid'])
+            else:
+                emit('sync',data,to=userlist[index-1]['sid'])
+        
+    print('received message: ' + str(data))
     
     
 @socketio.on('connect')
@@ -45,6 +45,7 @@ def handle_connect():
 def handle_connect(data):
     global userlist
     timess=0
+    
     for index in range(len(userlist)):
         if request.sid ==userlist[index]['sid']:
             userlist[index]['username']=str(data)
@@ -57,8 +58,12 @@ def handle_connect(data):
                 userlist[(index*2)+1]['status']='start_sync'
                 userlist[(index*2)]['status']='start_sync'
                 print(userlist[(index-1)*2]['sid'])
-                emit('sync',{'player':2,"opponent":userlist[(index*2)]['username']},to=request.sid)#sned to player2
-                emit('sync',{'player':1,"opponent":userlist[(index*2)+1]['username']},to=userlist[(index*2)]['sid'])#sned toplayer1
+                direction_x=random.choice([-1,1])
+                direction_y=random.choice([-1,1])
+                speedx=random.uniform(1,5)*direction_x
+                speedy=random.uniform(1,5)*direction_y
+                emit('sync',{'player':2,"opponent":userlist[(index*2)]['username'],'status':'info','speedx':speedx,'speedy':speedy},to=request.sid)#sned to player2
+                emit('sync',{'player':1,"opponent":userlist[(index*2)+1]['username'],'status':'info','speedx':speedx,'speedy':speedy},to=userlist[(index*2)]['sid'])#sned toplayer1
                 
                 
     print('-'*20,'\n',userlist,'\n','-'*20)

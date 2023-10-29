@@ -1,7 +1,7 @@
-let x, y, speedx, speedy;
-let player1_y=0;
-let kscore, mscore, flg;
-let player2_y=0;
+var x, y, speedx=0, speedy=0;
+var player1_y=0;
+var kscore, mscore, flg;
+var player2_y=0;
 
 function choice() {
   const choose = [1, -1];
@@ -9,12 +9,12 @@ function choice() {
 }
 
 function setup() {
-  createCanvas(800, 600);
-  //canvas.parent('canvas');
+  var canvas=createCanvas(800, 600);
+  canvas.parent('container');  
   x = width / 2;
   y = height / 2;
-  speedx = Math.floor(Math.random() * 3 + 5) * choice();
-  speedy = Math.floor(Math.random() * 3 + 5) * choice();
+  speedx =0;
+  speedy =0;
   x  = height / 2;
   kscore = 0;
   mscore = 0;
@@ -76,10 +76,10 @@ function draw() {
   text(mscore, width / 2 + 64, 120);
 }
 
-function mousePressed() {
-  x = width / 2;
-  y = height / 2;
-  speedx = Math.floor(Math.random() * 3 + 5) * choice();
-  speedy = Math.floor(Math.random() * 3 + 5) * choice();
-  flg = 0;
-}
+// function mousePressed() {
+//   x = width / 2;
+//   y = height / 2;
+//   speedx = Math.floor(Math.random() * 3 + 5) * choice();
+//   speedy = Math.floor(Math.random() * 3 + 5) * choice();
+//   flg = 0;
+// }
