@@ -23,3 +23,38 @@
     }
   }
   
+  .preloader > div {
+    background-color: #72c2a1;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    display: inline-block;
+    animation: stretchdelay 0.7s infinite ease-in-out;
+}
+
+@keyframes stretchdelay {
+ 0%, 40%, 100% { 
+      transform: translateY(0px);
+ }
+ 20% {
+      transform: translateY(-10px);
+ }
+}
+.preloader-text{
+  color:#72c2a1;
+}
+.preloader .circ1 {
+  animation-delay: 0;
+}
+
+.preloader .circ2 {
+  animation-delay: 0.1s;
+}
+
+.preloader .circ3 {
+  animation-delay: 0.2s;
+}
+
+.preloader .circ4 {
+  animation-delay: 0.3s;
+}

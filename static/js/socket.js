@@ -7,6 +7,8 @@ socket.on('connect', function () {
     document.getElementById('close').click();
     document.getElementById('defaultCanvas0').style.display = 'block';
     document.getElementById('button').classList += 'visually-hidden d-none';
+    document.getElementById('preloader').classList.remove('visually-hidden');
+
     window.username=username;
     // document.getElementById('offset').classList += 'visually-hidden';
     //socket.to("1").emit('my event', {speedx:speedx,speedy:speedy,x:x,y:y,kby,kby });
@@ -19,6 +21,7 @@ socket.on('sync', function (data) {
   //socket.join("1");
   
   if (data.status == 'info') {
+    document.getElementById('preloader').classList.add('visually-hidden');
     let information = document.getElementById('information');
     information.innerHTML = '';
     information.innerHTML += "<li>player:" + data['player'] + "</li>";
