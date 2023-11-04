@@ -9,6 +9,15 @@ times=0
 userlist=[]
 
 temp_id=None
+
+@app.route("/debug")
+def debug():
+    str(userlist)
+    data='<ul>'
+    for index in range(len(userlist)):
+        data+="<li>"+str(userlist[index])+"</li>"
+    return data
+
 @app.route("/")
 def home():
     return render_template("processing.html")
@@ -16,7 +25,7 @@ def home():
 @socketio.on('sync')
 def handle_message(data):
     global userlist
-    data['status']='sync'
+    data['status']='syncing'
     for index in range(len(userlist)):
         if userlist[index]['sid']==request.sid:
             if data['player']==1:
@@ -62,9 +71,9 @@ def handle_connect(data):
                 direction_y=random.choice([-1,1])
                 speedx=random.uniform(1,5)*direction_x
                 speedy=random.uniform(1,5)*direction_y
-                emit('sync',{'player':2,"opponent":userlist[(index*2)]['username'],'status':'info','speedx':speedx,'speedy':speedy},to=request.sid)#sned to player2
-                emit('sync',{'player':1,"opponent":userlist[(index*2)+1]['username'],'status':'info','speedx':speedx,'speedy':speedy},to=userlist[(index*2)]['sid'])#sned toplayer1
-                
+                emit('sync',{'player':2,"opponent":userlist[(index*2)]['username'],'status':'info','speedx':speedx,'speedy':speedy,"game":"pingpong"},to=request.sid)#sned to player2
+                emit('sync',{'player':1,"opponent":userlist[(index*2)+1]['username'],'status':'info','speedx':speedx,'speedy':speedy,"game":"pingpong"},to=userlist[(index*2)]['sid'])#sned toplayer1
+
                 
     print('-'*20,'\n',userlist,'\n','-'*20)
 
@@ -74,15 +83,21 @@ def handle_disconnect():
     timess=0
     for index in range(len(userlist)):
         if request.sid ==userlist[index]['sid']:
+            
+            if index%2==0:
+                emit('sync',{"status":'waiting'},to=userlist[index+1]['sid'])
+            else:
+                emit('sync',{"status":'waiting'},to=userlist[index-1]['sid'])
             del userlist[index]
             print('-'*20,'\n',userlist,'\n','-'*20)
+            
             return
     
-def check_user(sid):
-    for index in range(len(userlist)):
-        if request.sid ==userlist[index]['sid']:
-            return True
-    return False
+# def check_user(sid):
+#     for index in range(len(userlist)):
+#         if request.sid ==userlist[index]['sid']:
+#             return True
+#     return False
      
 
 if __name__ == '__main__':

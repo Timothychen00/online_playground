@@ -1,7 +1,8 @@
 var x, y, speedx=0, speedy=0;
 var player1_y=0;
-var kscore, mscore, flg;
+var player2_score, player1_score, flg;
 var player2_y=0;
+
 
 function choice() {
   const choose = [1, -1];
@@ -16,8 +17,8 @@ function setup() {
   speedx =0;
   speedy =0;
   x  = height / 2;
-  kscore = 0;
-  mscore = 0;
+  player2_score = 0;
+  player1_score = 0;
   flg = 0;
 }
 
@@ -32,7 +33,8 @@ function draw() {
 
   stroke(76, 214, 245);
   fill(76, 214, 245);
-  ellipse(x, y, 30, 30);
+
+  
 
   x = x + speedx;
   y = y + speedy;
@@ -41,13 +43,14 @@ function draw() {
   }
   fill(215, 242, 10);
   stroke(215, 242, 10);
+
   rect(width - 10, player2_y, 10, 160);
 
   if (x >= width - 10 && (y >= player2_y && y <= player2_y + 160)) {
     speedx = -speedx;
   } else if (x > width) {
     if (flg === 0) {
-      kscore++;
+      player2_score++;
       flg = 1;
     }
   }
@@ -64,7 +67,7 @@ function draw() {
     speedx = -speedx;
   } else if (x < 0) {
     if (flg === 0) {
-      mscore++;
+      player1_score++;
       flg = 1;
     }
   }
@@ -72,8 +75,16 @@ function draw() {
   fill(35, 36, 32);
   stroke(35, 36, 32);
   textSize(128);
-  text(kscore, width / 2 - 128, 120);
-  text(mscore, width / 2 + 64, 120);
+  text(player2_score, width / 2 - 128, 120);
+  text(player1_score, width / 2 + 64, 120);
+  if(x>width || x<0 ){
+    x=width/2;
+    y=height/2;
+    speedx=0;
+    speedy=0;
+  }else{
+    ellipse(x, y, 30, 30);
+  }
 }
 
 // function mousePressed() {

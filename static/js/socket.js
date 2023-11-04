@@ -1,3 +1,6 @@
+
+// countdown_animation()
+
 var socket = io({ autoConnect: false });
 
 socket.on('connect', function () {
@@ -7,21 +10,18 @@ socket.on('connect', function () {
     document.getElementById('close').click();
     document.getElementById('defaultCanvas0').style.display = 'block';
     document.getElementById('button').classList += 'visually-hidden d-none';
-    document.getElementById('preloader').classList.remove('visually-hidden');
+    loader_animation_on();
 
     window.username=username;
-    // document.getElementById('offset').classList += 'visually-hidden';
-    //socket.to("1").emit('my event', {speedx:speedx,speedy:speedy,x:x,y:y,kby,kby });
   }
 });
 socket.on('sync', function (data) {
   console.log(data);
 
-  // alert(1);
-  //socket.join("1");
   
   if (data.status == 'info') {
-    document.getElementById('preloader').classList.add('visually-hidden');
+    console.log(100000000);
+    loader_animation_off();
     let information = document.getElementById('information');
     information.innerHTML = '';
     information.innerHTML += "<li>player:" + data['player'] + "</li>";
@@ -32,12 +32,20 @@ socket.on('sync', function (data) {
     window.speedy=data['speedy'];
     if (window.player == 1)//main
     {
-      setInterval(()=>{socket.emit('sync', { player: 1, speedx: speedx, speedy: speedy, x: x, y: y, player_y: player1_y });},10);
+      setInterval(()=>{
+        if (window.countdown_number==0)
+          socket.emit('sync', { player: 1, speedx: speedx, speedy: speedy, x: x, y: y, player_y: player1_y,player1_score:player1_score,player2_score:player2_score});
+        },20);
+      
+    } else {setInterval(()=>{
+      if (window.countdown_number==0)
+      socket.emit('sync', { player: 2, player_y: player2_y });
+      },20)
 
-    } else {
-      setInterval(()=>{socket.emit('sync', { player: 2, player_y: player2_y });},10)
     }
-  }else{//同步遊戲數據
+    countdown_animation(3);
+    
+  }else if(data.status=="syncing"){//同步遊戲數據
     console.log(data);
     console.log(window);
     if (window.player == 1)//main
@@ -45,12 +53,19 @@ socket.on('sync', function (data) {
       window.player2_y=data.player_y;
     } else {
       window.player1_y=data.player_y;
+      player1_score=data.player1_score;
+      player2_score=data.player2_score;
+      // window.countdown_number=data.countdown_number;
+      // document.getElementById('countdown_text').innerText=countdown_number;
+      // countdown_animation(data.countdown_number,'display');
       // window.x=data.x;
       // window.y=data.y;
       // window.speedx=data.speedx;
       // window.speedy=data.speedy;
     }
-  }
+  }else if (data.status=='waiting')
+    loader_animation_on();
+    
 
   //socket.emit('my event', {speedx:speedx,speedy:speedy,x:x,y:y,kby,kby });
   //socket.to("1").emit('my event', {speedx:speedx,speedy:speedy,x:x,y:y,kby,kby });
@@ -58,4 +73,8 @@ socket.on('sync', function (data) {
 function connect() {
   //alert(1);
   socket.connect();
+}
+
+function a(){
+  alert(1);
 }
