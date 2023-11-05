@@ -20,7 +20,6 @@ socket.on('sync', function (data) {
 
   
   if (data.status == 'info') {
-    console.log(100000000);
     loader_animation_off();
     let information = document.getElementById('information');
     information.innerHTML = '';
@@ -28,22 +27,26 @@ socket.on('sync', function (data) {
     information.innerHTML += "<li>username:" + window.username + "</li>";
     information.innerHTML += "<li>opponent:" + data['opponent'] + "</li>";
     window.player = data.player;
-    window.speedx=data['speedx'];
-    window.speedy=data['speedy'];
+    // window.speedx=data['speedx'];
+    // window.speedy=data['speedy'];
+    
     if (window.player == 1)//main
     {
+      // ball();
       setInterval(()=>{
-        if (window.countdown_number==0)
+        if (window.countdown_number==0)//not countdowning
           socket.emit('sync', { player: 1, speedx: speedx, speedy: speedy, x: x, y: y, player_y: player1_y,player1_score:player1_score,player2_score:player2_score});
         },20);
+        countdown_animation(3,'delay',callback=ball);
       
     } else {setInterval(()=>{
       if (window.countdown_number==0)
       socket.emit('sync', { player: 2, player_y: player2_y });
       },20)
-
+      countdown_animation(3,'delay');
     }
-    countdown_animation(3);
+
+    
     
   }else if(data.status=="syncing"){//同步遊戲數據
     console.log(data);
@@ -58,10 +61,10 @@ socket.on('sync', function (data) {
       // window.countdown_number=data.countdown_number;
       // document.getElementById('countdown_text').innerText=countdown_number;
       // countdown_animation(data.countdown_number,'display');
-      // window.x=data.x;
-      // window.y=data.y;
-      // window.speedx=data.speedx;
-      // window.speedy=data.speedy;
+      window.x=data.x;
+      window.y=data.y;
+      window.speedx=data.speedx;
+      window.speedy=data.speedy;
     }
   }else if (data.status=='waiting')
     loader_animation_on();

@@ -46,7 +46,8 @@ def handle_connect():
     if timess==0:
         userlist.append({
             'sid':request.sid,
-            'status':False
+            'status':False,
+            'game':"pingpong"
         })
     print(request.sid)
     
@@ -71,8 +72,11 @@ def handle_connect(data):
                 direction_y=random.choice([-1,1])
                 speedx=random.uniform(1,5)*direction_x
                 speedy=random.uniform(1,5)*direction_y
-                emit('sync',{'player':2,"opponent":userlist[(index*2)]['username'],'status':'info','speedx':speedx,'speedy':speedy,"game":"pingpong"},to=request.sid)#sned to player2
-                emit('sync',{'player':1,"opponent":userlist[(index*2)+1]['username'],'status':'info','speedx':speedx,'speedy':speedy,"game":"pingpong"},to=userlist[(index*2)]['sid'])#sned toplayer1
+                
+                emit('sync',{'player':2,"opponent":userlist[(index*2)]['username'],'status':'info',"game":"pingpong"},to=request.sid)#sned to player2
+                emit('sync',{'player':1,"opponent":userlist[(index*2)+1]['username'],'status':'info',"game":"pingpong"},to=userlist[(index*2)]['sid'])#sned toplayer1
+                # emit('sync',{'player':2,"opponent":userlist[(index*2)]['username'],'status':'info','speedx':speedx,'speedy':speedy,"game":"pingpong"},to=request.sid)#sned to player2
+                # emit('sync',{'player':1,"opponent":userlist[(index*2)+1]['username'],'status':'info','speedx':speedx,'speedy':speedy,"game":"pingpong"},to=userlist[(index*2)]['sid'])#sned toplayer1
 
                 
     print('-'*20,'\n',userlist,'\n','-'*20)
