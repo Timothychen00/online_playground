@@ -111,16 +111,42 @@
 /*雙向*/
 .square {
     width: 1px;
-    height: 75px;
+    height: 50px;
     background: rgb(255, 255, 255);
     border: 2px solid black;
     border-radius: 0 0.5rem 0.5rem 0;
     display: block;
     transition: width 2s;
+    transition: all 0.5s ease-out;
+    transform: scale(1, 1);
     /*將transition寫在原本狀態中*/
 }
 
 .square.active,
 .square:active {
-    width: 200px;
+    width: 250px;
+}
+
+.square:hover {
+    transform: scale(1.05, 1.05);
+}
+
+.score {
+    width: 1px;
+    height: 80px;
+    background: rgb(255, 255, 255);
+    border: 2px solid black;
+    border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
+    display: block;
+    transition: width 2s;
+    transition: all 0.5s ease-out;
+    transform: scale(1, 1);
+}
+
+.score.active {
+    width: 250px;
+}
+
+.score:hover {
+    transform: scale(1.05, 1.05);
 }

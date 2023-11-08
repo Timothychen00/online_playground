@@ -16,10 +16,40 @@
 </head>
 
 <body>
-    <div class="conatiner-fluid each-game-body" style="height: 100vh;width:auto">
-        <div class="row text-center">
-            <div class="square mt-3">
-                <h5 id="player_text" style="display: none;">Player1</h5>
+    <div class="conatiner-fluid each-game-body" style="height: 100vh;width:auto;overflow-x:hidden">
+        <div class="row">
+            <div class="col-3">
+                <div class="square mt-3 text-center shadow">
+                    <h2 class="heartBeat_text" style="display: none;">Player1</h2>
+                    <div class="more_information" style="display: none;">
+                        <hr class="mx-3">
+                        <p class="ms-4 text-start" style="color:gray;">20ms</p>
+                        <p class="ms-4 text-start" style="color:gray;">Username: tim20060112
+                        </p>
+                        <p class="ms-4 text-start" style="color:gray;">Opponent: timothychen
+                        </p>
+                        <hr class="mx-3">
+                        <button class="btn btn-danger">Leave Game</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="score mt-3 text-center mx-auto shadow" style="display:none;">
+                    <h2 class="bounce_text" style="display: none;">score</h2>
+                    <div class="d-flex justify-content-center">
+                        <span id="score_1_display">
+                            <h5 class="bounce_text" id="score_1" style="display: none;margin-top:-5px;">0</h5>
+                        </span>
+                        <h5 class="bounce_text ms-1 me-1" style="display: none;margin-top:-5px;">vs</h5>
+                        <span id="score_2_display">
+                            <h5 class="bounce_text" style="display: none;margin-top:-5px;">0</h5>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <button class="btn btn-warning mt-2 text-white" id="add_score_1">add_player_1</button>
+                <button class="btn btn-warning mt-2 text-white" id="add_score_2">add_player_2</button>
             </div>
         </div>
     </div>
