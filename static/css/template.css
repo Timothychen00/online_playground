@@ -58,3 +58,16 @@
 .preloader .circ4 {
   animation-delay: 0.3s;
 }
+.delete-button {
+  color: white;
+  border-radius: 0.5rem;
+  height: 27px;
+  width: 27px;
+  padding-top: 0;
+  background-color: rgb(217, 87, 70);
+  border: none;
+  margin-top: 5px;
+}
+.delete-button:hover {
+  background-color: rgb(181, 79, 66);
+}

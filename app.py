@@ -1,5 +1,5 @@
 from flask import Flask, render_template,request,jsonify
-from flask_socketio import SocketIO,send,emit,join_room, leave_room
+from flask_socketio import SocketIO,send,emit,join_room, leave_room,disconnect
 import random,json
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
@@ -103,12 +103,14 @@ def handle_debug(data):
         emit('debug',{'userlist':json.dumps(userlist)})
     
         
-    
+@app.route('/remove/<string:sid>')
 def remove_user(sid):
+    global userlist
+    disconnect(sid)
     for index in range(len(userlist)):
         if sid ==userlist[index]['sid']:
             del userlist[index]
-    return False
+    return '1'
      
 
 if __name__ == '__main__':

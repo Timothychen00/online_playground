@@ -35,14 +35,18 @@ socket.on('sync', function (data) {
       // ball();
       setInterval(()=>{
         if (window.countdown_number==0)//not countdowning
-          socket.emit('sync', { player: 1, speedx: speedx, speedy: speedy, x: x, y: y, player_y: player1_y,player1_score:player1_score,player2_score:player2_score});
-        },20);
+          socket.emit('sync', { player: 1, speedx: speedx, speedy: speedy, x: x, y: y, player_y: player1_y,player1_score:player1_score,player2_score:player2_score,msg:msg});
+        if (msg=='countdown')
+        {
+          window.msg='';
+        }
+        },10);
         countdown_animation(3,'delay',callback=ball);
       
     } else {setInterval(()=>{
       if (window.countdown_number==0)
       socket.emit('sync', { player: 2, player_y: player2_y });
-      },20)
+      },10)
       countdown_animation(3,'delay');
     }
 
@@ -65,16 +69,15 @@ socket.on('sync', function (data) {
       window.y=data.y;
       window.speedx=data.speedx;
       window.speedy=data.speedy;
+      if (data.msg=="countdown")
+        countdown_animation(3,'delay');
     }
   }else if (data.status=='waiting')
     loader_animation_on();
     
 
-  //socket.emit('my event', {speedx:speedx,speedy:speedy,x:x,y:y,kby,kby });
-  //socket.to("1").emit('my event', {speedx:speedx,speedy:speedy,x:x,y:y,kby,kby });
 });
 function connect() {
-  //alert(1);
   socket.connect();
 }
 
