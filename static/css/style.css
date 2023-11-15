@@ -1,0 +1,152 @@
+.main-body {
+    overflow: hidden;
+    background-color: hsl(218, 41%, 15%);
+    background-image: radial-gradient(650px circle at 0% 0%,
+            hsl(218, 41%, 35%) 15%,
+            hsl(218, 41%, 30%) 35%,
+            hsl(218, 41%, 20%) 75%,
+            hsl(218, 41%, 19%) 80%,
+            transparent 100%),
+        radial-gradient(1250px circle at 100% 100%,
+            hsl(218, 41%, 45%) 15%,
+            hsl(218, 41%, 30%) 35%,
+            hsl(218, 41%, 20%) 75%,
+            hsl(218, 41%, 19%) 80%,
+            transparent 100%);
+}
+
+#radius-shape-1 {
+    height: 220px;
+    width: 220px;
+    top: -60px;
+    left: -130px;
+    background: radial-gradient(#44006b, #ad1fff);
+    opacity: 0.89;
+    overflow: hidden;
+}
+
+#radius-shape-2 {
+    border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;
+    bottom: -60px;
+    right: -110px;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(#44006b, #ad1fff);
+    opacity: 0.89;
+    overflow: hidden;
+}
+
+.middle-board {
+    background-color: white;
+    opacity: 0.89;
+}
+
+.icon-button {
+    font-size: 30px;
+    transition: all .3s;
+    transform: scale(1);
+}
+
+.icon-button :hover {
+    transition: all .3s;
+    font-size: 50px;
+    transform: scale(1.2);
+}
+
+.hr {
+    color: #000;
+    border: 0;
+    font-size: 12px;
+    padding: 10px 0;
+    position: relative;
+}
+
+.hr::before {
+    content: "更多登入方式";
+    position: absolute;
+    padding: 0 10px;
+    line-height: 1px;
+    border: solid rgb(9, 0, 0);
+    border-width: 0 100vw;
+    white-space: nowrap;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.game-card {
+    height: 300px;
+    width: 450px;
+    background-color: #ffffff;
+    outline: none;
+    border-radius: 0.7rem;
+    box-shadow: 0 0 0px #696966;
+    transform: scale(1, 1);
+    transition: all 0.3s ease-out;
+}
+
+.game-card:hover {
+    transform: scale(1.05, 1.05);
+}
+
+.game-img {
+    border-radius: 0.7rem 0.7rem 0 0;
+}
+
+.notify-pill {
+    background-color: rgb(213, 11, 11);
+    font-weight: 600;
+    border-radius: 50%;
+    width: 25px;
+}
+
+.hide {
+    display: none;
+}
+
+.each-game-body {
+    background: linear-gradient(120deg, rgb(44, 103, 163) 50%, rgb(220, 75, 76) 50%) repeat;
+}
+
+
+/*雙向*/
+.square {
+    width: 1px;
+    height: 50px;
+    background: rgb(255, 255, 255);
+    border: 2px solid black;
+    border-radius: 0 0.5rem 0.5rem 0;
+    display: block;
+    transition: width 2s;
+    transition: all 0.5s ease-out;
+    transform: scale(1, 1);
+    /*將transition寫在原本狀態中*/
+}
+
+.square.active,
+.square:active {
+    width: 250px;
+}
+
+.square:hover {
+    transform: scale(1.05, 1.05);
+}
+
+.score {
+    width: 1px;
+    height: 80px;
+    background: rgb(255, 255, 255);
+    border: 2px solid black;
+    border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
+    display: block;
+    transition: width 2s;
+    transition: all 0.5s ease-out;
+    transform: scale(1, 1);
+}
+
+.score.active {
+    width: 250px;
+}
+
+.score:hover {
+    transform: scale(1.05, 1.05);
+}

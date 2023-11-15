@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="/static/css/style.css">
+
+</head>
+
+<body>
+    <div class="conatiner-fluid each-game-body" style="height: 100vh;width:auto;overflow-x:hidden">
+        <div class="row">
+            <div class="col-3">
+                <div class="square mt-3 text-center shadow">
+                    <h2 class="heartBeat_text" style="display: none;">Player1</h2>
+                    <div class="more_information" style="display: none;">
+                        <hr class="mx-3">
+                        <p class="ms-4 text-start" style="color:gray;">20ms</p>
+                        <p class="ms-4 text-start" style="color:gray;">Username: tim20060112
+                        </p>
+                        <p class="ms-4 text-start" style="color:gray;">Opponent: timothychen
+                        </p>
+                        <hr class="mx-3">
+                        <button class="btn btn-danger">Leave Game</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="score mt-3 text-center mx-auto shadow" style="display:none;">
+                    <h2 class="bounce_text" style="display: none;">score</h2>
+                    <div class="d-flex justify-content-center">
+                        <span id="score_1_display">
+                            <h5 class="bounce_text" id="score_1" style="display: none;margin-top:-5px;">0</h5>
+                        </span>
+                        <h5 class="bounce_text ms-1 me-1" style="display: none;margin-top:-5px;">vs</h5>
+                        <span id="score_2_display">
+                            <h5 class="bounce_text" style="display: none;margin-top:-5px;">0</h5>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <button class="btn btn-warning mt-2 text-white" id="add_score_1">add_player_1</button>
+                <button class="btn btn-warning mt-2 text-white" id="add_score_2">add_player_2</button>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <!-- place footer here -->
+    </footer>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="/static/js/text.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+        </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+        </script>
+</body>
+
+</html>
