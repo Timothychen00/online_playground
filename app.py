@@ -1,23 +1,23 @@
-from flask import Flask, render_template,request,jsonify
+from flask import Flask, render_template,request,jsonify,session
 from flask_socketio import SocketIO,send,emit,join_room, leave_room,disconnect
-import random,json
+import random,json,os
+from flask_restful import Api,Resource
+from flask_cors import CORS
+from dotenv import load_dotenv
+from project.models import db
+load_dotenv()
+
+
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'secret!'
+app.config['SECRET_KEY'] = os.urandom(16).hex()
 app.config['DEBUG']=True
-socketio = SocketIO(app)
+socketio = SocketIO(app, cors_allowed_origins="*")
+CORS(app,resources={r"*": {"origins": "*"}})
+Api(app)
+
 times=0
 userlist=[]
-
 temp_id=None
-
-@app.route("/debug")
-def debug():
-
-    return render_template('debug.html')
-
-@app.route("/")
-def home():
-    return render_template("processing.html")
 
 @socketio.on('sync')
 def handle_message(data):
