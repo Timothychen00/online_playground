@@ -1,6 +1,6 @@
-from flask import Flask, render_template,request
-from flask_socketio import SocketIO,send,emit,join_room, leave_room
-import random
+from flask import Flask, render_template,request,jsonify
+from flask_socketio import SocketIO,send,emit,join_room, leave_room,disconnect
+import random,json
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 app.config['DEBUG']=True
@@ -12,11 +12,8 @@ temp_id=None
 
 @app.route("/debug")
 def debug():
-    str(userlist)
-    data='<ul>'
-    for index in range(len(userlist)):
-        data+="<li>"+str(userlist[index])+"</li>"
-    return data
+
+    return render_template('debug.html')
 
 @app.route("/")
 def home():
@@ -40,21 +37,24 @@ def handle_message(data):
 def handle_connect():
     global userlist
     timess=0
-    for user in userlist:
-        if request.sid ==user['sid']:
-            timess+=1
-    if timess==0:
-        userlist.append({
-            'sid':request.sid,
-            'status':False,
-            'game':"pingpong"
-        })
+
     print(request.sid)
     
 @socketio.on('join')
 def handle_connect(data):
     global userlist
     timess=0
+    # join list
+    for user in userlist:
+        if request.sid ==user['sid']:
+            timess+=1
+            
+    if timess==0:
+        userlist.append({
+            'sid':request.sid,
+            'status':False,
+            'game':"pingpong"
+        })
     
     for index in range(len(userlist)):
         if request.sid ==userlist[index]['sid']:
@@ -96,12 +96,21 @@ def handle_disconnect():
             print('-'*20,'\n',userlist,'\n','-'*20)
             
             return
+        
+@socketio.on('debug')
+def handle_debug(data):
+    if 'userlist' in data:
+        emit('debug',{'userlist':json.dumps(userlist)})
     
-# def check_user(sid):
-#     for index in range(len(userlist)):
-#         if request.sid ==userlist[index]['sid']:
-#             return True
-#     return False
+        
+@app.route('/remove/<string:sid>')
+def remove_user(sid):
+    global userlist
+    disconnect(sid)
+    for index in range(len(userlist)):
+        if sid ==userlist[index]['sid']:
+            del userlist[index]
+    return '1'
      
 
 if __name__ == '__main__':

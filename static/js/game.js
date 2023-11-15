@@ -34,8 +34,6 @@ function draw() {
   stroke(76, 214, 245);
   fill(76, 214, 245);
 
-
-
   x = x + speedx;
   y = y + speedy;
   if (y > height || y < 0) {
@@ -51,6 +49,9 @@ function draw() {
   } else if (x > width) {
     if (flg === 0) {
       player1_score++;
+      // add_score(1);
+      window.msg='countdown';
+      countdown_animation(3,'delay',callback=ball);
       flg = 1;
     }
   }
@@ -71,6 +72,9 @@ function draw() {
   } else if (x < 0) {
     if (flg === 0) {
       player2_score++;
+      // add_score(2);
+      window.msg='countdown';
+      countdown_animation(3,'delay',callback=ball);
       flg = 1;
     }
   }
@@ -96,4 +100,6 @@ function ball() {
   speedx = Math.floor(Math.random() * 3 + 5) * choice();
   speedy = Math.floor(Math.random() * 3 + 5) * choice();
   flg = 0;
+ 
+  
 }
