@@ -4,6 +4,7 @@ import random,json,os
 from flask_restful import Api,Resource
 from flask_cors import CORS
 from dotenv import load_dotenv
+from project.models import db
 load_dotenv()
 
 
@@ -12,10 +13,10 @@ app.config['SECRET_KEY'] = os.urandom(16).hex()
 app.config['DEBUG']=True
 socketio = SocketIO(app, cors_allowed_origins="*")
 CORS(app,resources={r"*": {"origins": "*"}})
+Api(app)
 
 times=0
 userlist=[]
-
 temp_id=None
 
 @socketio.on('sync')
