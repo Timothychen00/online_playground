@@ -1,7 +1,7 @@
 
 // countdown_animation()
 
-var socket = io({ autoConnect: false });
+var socket = io('http://localhost:5300',{ autoConnect: false });
 
 socket.on('connect', function () {
   let username = document.getElementById('username').value;
@@ -40,13 +40,13 @@ socket.on('sync', function (data) {
         {
           window.msg='';
         }
-        },10);
+        },5);
         countdown_animation(3,'delay',callback=ball);
       
     } else {setInterval(()=>{
       if (window.countdown_number==0)
       socket.emit('sync', { player: 2, player_y: player2_y });
-      },10)
+      },5)
       countdown_animation(3,'delay');
     }
 

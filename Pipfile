@@ -6,6 +6,9 @@ name = "pypi"
 [packages]
 flask = "*"
 flask-socketio = "*"
+flask-restful = "*"
+flask-cors = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
