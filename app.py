@@ -7,7 +7,6 @@ from dotenv import load_dotenv
 from project.models import db
 load_dotenv()
 
-
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.urandom(16).hex()
 app.config['DEBUG']=True
@@ -36,8 +35,6 @@ def handle_message(data):
 @socketio.on('connect')
 def handle_connect():
     global userlist
-    timess=0
-
     print(request.sid)
     
 @socketio.on('join')
@@ -68,15 +65,9 @@ def handle_connect(data):
                 userlist[(index*2)+1]['status']='start_sync'
                 userlist[(index*2)]['status']='start_sync'
                 print(userlist[(index-1)*2]['sid'])
-                direction_x=random.choice([-1,1])
-                direction_y=random.choice([-1,1])
-                speedx=random.uniform(1,5)*direction_x
-                speedy=random.uniform(1,5)*direction_y
                 
                 emit('sync',{'player':2,"opponent":userlist[(index*2)]['username'],'status':'info',"game":"pingpong"},to=request.sid)#sned to player2
                 emit('sync',{'player':1,"opponent":userlist[(index*2)+1]['username'],'status':'info',"game":"pingpong"},to=userlist[(index*2)]['sid'])#sned toplayer1
-                # emit('sync',{'player':2,"opponent":userlist[(index*2)]['username'],'status':'info','speedx':speedx,'speedy':speedy,"game":"pingpong"},to=request.sid)#sned to player2
-                # emit('sync',{'player':1,"opponent":userlist[(index*2)+1]['username'],'status':'info','speedx':speedx,'speedy':speedy,"game":"pingpong"},to=userlist[(index*2)]['sid'])#sned toplayer1
 
                 
     print('-'*20,'\n',userlist,'\n','-'*20)
@@ -97,20 +88,20 @@ def handle_disconnect():
             
             return
         
-@socketio.on('debug')
-def handle_debug(data):
-    if 'userlist' in data:
-        emit('debug',{'userlist':json.dumps(userlist)})
+# @socketio.on('debug')
+# def handle_debug(data):
+#     if 'userlist' in data:
+#         emit('debug',{'userlist':json.dumps(userlist)})
     
         
-@app.route('/remove/<string:sid>')
-def remove_user(sid):
-    global userlist
-    disconnect(sid)
-    for index in range(len(userlist)):
-        if sid ==userlist[index]['sid']:
-            del userlist[index]
-    return '1'
+# @app.route('/remove/<string:sid>')
+# def remove_user(sid):
+#     global userlist
+#     disconnect(sid)
+#     for index in range(len(userlist)):
+#         if sid ==userlist[index]['sid']:
+#             del userlist[index]
+#     return '1'
      
 
 if __name__ == '__main__':

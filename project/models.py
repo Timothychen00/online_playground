@@ -11,7 +11,7 @@ class DB_model():
     def back_up():
         pass
     
-    def down_load():
+    def download():
         pass
     
     def upload():
@@ -19,11 +19,58 @@ class DB_model():
     
 db=DB_model()
 
-class User_Management():
-    pass
-    
+
 class User():
-    pass
+    def create_user():
+        pass
     
-class Game():
-    pass
+    def get_game():
+        pass
+    
+    def edit_user():
+        pass
+    
+    def delete_user():
+        pass
+
+
+class Session():
+    def get_session():
+        pass
+    
+    def login_session():
+        pass
+    
+    def clear_session():
+        pass
+
+
+class Room():#a room is settled for handling a game
+    def create_room():
+        pass
+    
+    def delete_room():
+        pass
+    
+    def pairing_room():# 匹配
+        pass
+    
+    def add_user():
+        pass
+    
+    def remove_user():
+        pass
+
+
+class Game():#a room is settled for handling a game
+    def create_game():
+        pass
+    
+    def get_game():
+        pass
+    
+    def edit_game():# 匹配
+        pass
+    
+    def delete_game():
+        pass
