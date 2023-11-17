@@ -24,7 +24,7 @@ class User():
     def create_user():
         pass
     
-    def get_game():
+    def get_user():
         pass
     
     def edit_user():
@@ -60,7 +60,6 @@ class Room():#a room is settled for handling a game
     
     def remove_user():
         pass
-
 
 class Game():#a room is settled for handling a game
     def create_game():
