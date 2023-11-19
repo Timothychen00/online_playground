@@ -1,12 +1,17 @@
 from pymongo.mongo_client import MongoClient
 from dotenv import load_dotenv
-import os
+import os,time
 load_dotenv()
     
 class DB_model():
     def __init__(self):
         self.client=MongoClient(f'mongodb+srv://{os.environ["DB_USER"]}:{os.environ["DB_PASS"]}@cluster0.n5ouq33.mongodb.net/?retryWrites=true&w=majority')
-        self.client.admin.command('ping')
+        self.db=self.client.db
+        try:
+            self.client.admin.command('ping')
+            print('資料庫連線成功')
+        except:
+            print('資料庫連線失敗')
     
     def back_up():
         pass
@@ -17,20 +22,35 @@ class DB_model():
     def upload():
         pass
     
-db=DB_model()
+db_model=DB_model()
 
+def check_document(collection='users',key_value={},isSingle:bool=True):# 返回值都是err的錯誤
+    '''
+    to do a simple check of all the files in the databse
+    '''
+    print(key_value)
+    if len(key_value) or not isSingle:#finding situation->set  issingle to false to enable all round searching
+        counts=db_model.db[collection].count_documents(key_value)
+        if counts==0:
+            return {'err':'not found'}
+        # >0
+        if isSingle:
+            if counts>1:
+                return {'err':'too many results'}
+        return ''
+    return {'err':'key and value are required for checking documents'}
 
-class User():
-    def create_user():
+class User:
+    def create_user(data:dict):
         pass
     
-    def get_user():
+    def get_user(filter:dict,isSingle=True):
         pass
     
-    def edit_user():
+    def edit_user(filter:dict,data:dict):
         pass
     
-    def delete_user():
+    def delete_user(filter:dict,isSingle=True):
         pass
 
 
@@ -38,7 +58,7 @@ class Session():
     def get_session():
         pass
     
-    def login_session():
+    def login_session(args):
         pass
     
     def clear_session():
@@ -46,30 +66,104 @@ class Session():
 
 
 class Room():#a room is settled for handling a game
-    def create_room():
-        pass
-    
-    def delete_room():
-        pass
+    def create_room(args:dict):
+        data={
+            '_id':"R"+str(time.time())[-5:],#6碼
+            "users":[
+                args['sid'],
+            ],
+            "game":args['game'],
+            "status":"waiting",
+        }
+        result=db_model.db['rooms'].insert_one(data)
+        return f"{result.inserted_id} created!"
+
+    def get_room(filter,isSingle=True):
+        result=check_document('rooms',filter,isSingle)
+        if 'err' not in result:
+            result=list(db_model.db['rooms'].find(filter))
+            if isSingle:
+                result=result[0]#extract
+        return result
+
+    def edit_room(filter,data):
+        result=Room.get_game(filter,isSingle=True)
+        print(data)
+        if 'err' not in result:
+            db_model.db['rooms'].update_one(filter,{"$set":data})
+            
+            return f"{result['_id']} edited!"
+        return result#err return
+
+    def delete_game(filter,isSingle=True):
+        result=check_document('rooms',filter,isSingle)
+        if 'err' not in result:
+            delete_id=result['_id']
+            if isSingle:
+                db_model.db['rooms'].delete_one(filter)#not yets
+            else:
+                db_model.db['rooms'].delete_many(filter)
+                delete_id=[]
+                for i in result:
+                    delete_id.append(i['_id'])
+
+            return f"{delete_id} deleted!"
+        return result
     
     def pairing_room():# 匹配
         pass
     
-    def add_user():
+    def leave_room():
         pass
     
-    def remove_user():
+    def join_room():
         pass
+    
 
 class Game():#a room is settled for handling a game
-    def create_game():
-        pass
+    def create_game(args:dict):
+        data={
+            '_id':"G"+str(time.time())[-5:],#6碼
+            "name":args['name'],
+            "author":args['author'],
+            'description':args['description'],
+            'users_number':args['users_number'],
+            'sync_mode':args['sync_mode'],
+            'sync_variables':args['sync_variables']#need check as a list
+        }
+        result=db_model.db['games'].insert_one(data)
+        return f"{result.inserted_id} created!"
     
-    def get_game():
-        pass
+    def get_game(filter,isSingle=True):
+        result=check_document('games',filter,isSingle)
+        if 'err' not in result:
+            result=list(db_model.db['games'].find(filter))
+            if isSingle:
+                result=result[0]#extract
+        return result
     
-    def edit_game():# 匹配
-        pass
+    def edit_game(filter,data):# 匹配
+        result=Game.get_game(filter,isSingle=True)
+        print(data)
+        if 'err' not in result:
+            db_model.db['games'].update_one(filter,{"$set":data})
+            
+            return f"{result['_id']} edited!"
+        return result#err return
+        
+        
     
-    def delete_game():
-        pass
+    def delete_game(filter,isSingle=True):
+        result=check_document('games',filter,isSingle)
+        if 'err' not in result:
+            delete_id=result['_id']
+            if isSingle:
+                db_model.db['games'].delete_one(filter)#not yets
+            else:
+                db_model.db['games'].delete_many(filter)
+                delete_id=[]
+                for i in result:
+                    delete_id.append(i['_id'])
+
+            return f"{delete_id} deleted!"
+        return result

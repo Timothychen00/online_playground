@@ -3,8 +3,9 @@ from flask_socketio import SocketIO,send,emit,join_room, leave_room,disconnect
 import random,json,os
 from flask_restful import Api,Resource
 from flask_cors import CORS
+from project.api import UserAPI,SessionAPI,GameAPI,RoomAPI
 from dotenv import load_dotenv
-from project.models import db
+from project.models import db_model
 load_dotenv()
 
 app = Flask(__name__)
