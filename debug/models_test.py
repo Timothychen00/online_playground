@@ -1,19 +1,20 @@
 from project.models import *
 
-print(
-Game.create_game(
-    {
-            "name":'pingpong',
-            "author":'timothy',
-            'description':'hhh',
-            'users_number':2,
-            'sync_mode':'auto',
-            'sync_variables':['1','2']
+# print(
+# Game.create_game(
+#     {
+#             "name":'pingpong',
+#             "author":'timothy',
+#             'description':'hhh',
+#             'users_number':2,
+#             'sync_mode':'auto',
+#             'sync_variables':['1','2']
         
-    }
-)
-)
-           
+#     }
+# )
+# )
+# db_model.db['games'].delete_one()
+# print(1)
            
 # print(
 # Game.edit_game({'name':'pingpong'},
@@ -26,3 +27,16 @@ Game.create_game(
 #     }
 # )
 # )
+
+
+print(
+Room.create_room(
+    
+    {
+            'sid':'12322322322',#6碼
+            "game":'pingpong',
+        }
+        
+    
+)
+)

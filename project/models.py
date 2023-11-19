@@ -3,6 +3,9 @@ from dotenv import load_dotenv
 import os,time
 load_dotenv()
     
+# get_method=> err and data
+# check_documents=> err
+# avoid abort
 class DB_model():
     def __init__(self):
         self.client=MongoClient(f'mongodb+srv://{os.environ["DB_USER"]}:{os.environ["DB_PASS"]}@cluster0.n5ouq33.mongodb.net/?retryWrites=true&w=majority')
@@ -73,10 +76,14 @@ class Room():#a room is settled for handling a game
                 args['sid'],
             ],
             "game":args['game'],
-            "status":"waiting",
+            "status":"waiting",# waiting pairing gaming
         }
         result=db_model.db['rooms'].insert_one(data)
         return f"{result.inserted_id} created!"
+
+
+
+
 
     def get_room(filter,isSingle=True):
         result=check_document('rooms',filter,isSingle)
@@ -95,7 +102,7 @@ class Room():#a room is settled for handling a game
             return f"{result['_id']} edited!"
         return result#err return
 
-    def delete_game(filter,isSingle=True):
+    def delete_room(filter,isSingle=True):
         result=check_document('rooms',filter,isSingle)
         if 'err' not in result:
             delete_id=result['_id']
@@ -110,18 +117,29 @@ class Room():#a room is settled for handling a game
             return f"{delete_id} deleted!"
         return result
     
-    def pairing_room():# 匹配
+    def pairing_room():# 匹配 隨機加入可以加入的房間
         pass
     
     def leave_room():
         pass
     
-    def join_room():
-        pass
+    def join_room(roomid,sid):
+        result=Room.get_room('rooms',{'_id':roomid},isSingle=True)
+        if 'err' not in result:
+            game_result=Game.get_game('games',{'name':result['game']},isSingle=True)
+            if 'err' not in game_result:
+                if game_result['users_number']>len(result['users']):
+                    result['users'].append(sid)
+                    
+                if game_result['users_number']==len(result['users']):#full
+                    result['status']='gaming'
+            return game_result
+        return result
+        
     
 
 class Game():#a room is settled for handling a game
-    def create_game(args:dict):
+    def create_game(args:dict):#name repetenot yet
         data={
             '_id':"G"+str(time.time())[-5:],#6碼
             "name":args['name'],
