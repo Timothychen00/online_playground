@@ -10,6 +10,9 @@ class DB_model():
     def __init__(self):
         self.client=MongoClient(f'mongodb+srv://{os.environ["DB_USER"]}:{os.environ["DB_PASS"]}@cluster0.n5ouq33.mongodb.net/?retryWrites=true&w=majority')
         self.db=self.client.db
+        self.cachable=True
+        self.cache=list(self.db['rooms'].find({}))
+        
         try:
             self.client.admin.command('ping')
             print('資料庫連線成功')
@@ -24,6 +27,9 @@ class DB_model():
     
     def upload():
         pass
+
+    def renew_cache(self):
+        self.cache=list(self.db['rooms'].find({}))
     
 db_model=DB_model()
 
@@ -31,7 +37,7 @@ def check_document(collection='users',key_value={},isSingle:bool=True):# 返回�
     '''
     to do a simple check of all the files in the databse
     '''
-    print(key_value)
+    # print(key_value)
     if len(key_value) or not isSingle:#finding situation->set  issingle to false to enable all round searching
         counts=db_model.db[collection].count_documents(key_value)
         if counts==0:
@@ -86,15 +92,27 @@ class Room():#a room is settled for handling a game
 
 
     def get_room(filter,isSingle=True):
-        result=check_document('rooms',filter,isSingle)
-        if 'err' not in result:
-            result=list(db_model.db['rooms'].find(filter))
-            if isSingle:
-                result=result[0]#extract
-        return result
+        if db_model.cachable:
+            if filter:
+                return_documents=[]
+                for document in db_model.cache:#go through documents
+                    for key in filter:
+                        if filter[key]!=document[key]:
+                            break
+                    else:#no break
+                        return_documents.append(document)
+            else:
+                return db_model.cache
+        else:
+            result=check_document('rooms',filter,isSingle)
+            if 'err' not in result:
+                result=list(db_model.db['rooms'].find(filter))
+                if isSingle:
+                    result=result[0]#extract
+            return result
 
     def edit_room(filter,data):
-        result=Room.get_game(filter,isSingle=True)
+        result=Room.get_room(filter,isSingle=True)
         print(data)
         if 'err' not in result:
             db_model.db['rooms'].update_one(filter,{"$set":data})

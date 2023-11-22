@@ -1,5 +1,5 @@
 from project.models import *
-
+from project.decorators import *
 # print(
 # Game.create_game(
 #     {
@@ -29,14 +29,22 @@ from project.models import *
 # )
 
 
-print(
-Room.create_room(
+# print(
+# Room.create_room(
     
-    {
-            'sid':'12322322322',#6碼
-            "game":'pingpong',
-        }
+#     {
+#             'sid':'12322322322',#6碼
+#             "game":'pingpong',
+#         }
         
     
-)
-)
+# )
+# )
+db_model.cachable=True
+@timing
+def speed_test():
+    for i in range(1000):
+        
+        Room.get_room({'status':'waiting'},isSingle=False)
+speed_test()
+
