@@ -9,8 +9,8 @@ flask-socketio = "*"
 flask-restful = "*"
 flask-cors = "*"
 python-dotenv = "*"
-pymongo = "==3.6"
 dnspython = "*"
+pymongo = "*"
 
 [dev-packages]
 
