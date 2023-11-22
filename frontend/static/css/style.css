@@ -150,3 +150,41 @@
 .score:hover {
     transform: scale(1.05, 1.05);
 }
+
+.color_dark_purple {
+    background-color: rgb(40, 39, 64);
+}
+
+.color_light_purple {
+    background-color: rgb(91, 101, 235);
+}
+
+.side_card {
+    border-radius: 0.6rem;
+    color: #ffffff;
+    transition: width 2s;
+    transition: all 0.5s ease-out;
+    transform: scale(1, 1);
+}
+
+.side_card.active {
+    border: rgb(91, 101, 235) solid;
+    background-color: rgb(91, 101, 235);
+}
+
+.side_card:hover {
+    transform: scale(1.05, 1.05);
+    border: rgb(245, 203, 106) solid;
+    background-color: rgb(245, 203, 106);
+}
+
+.img_platform {
+    border: 10px rgb(40, 39, 64) solid;
+    border-radius: 1.5rem;
+    max-height: 200px;
+    width: 1000px;
+}
+
+.text_800 {
+    font-weight: 800;
+}
