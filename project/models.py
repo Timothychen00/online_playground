@@ -1,6 +1,6 @@
 from pymongo.mongo_client import MongoClient
 from dotenv import load_dotenv
-import os,time
+import os,time,json
 load_dotenv()
     
 # get_method=> err and data
@@ -51,8 +51,11 @@ def check_document(collection='users',key_value={},isSingle:bool=True):# 返回�
 
 class User:
     def create_user(data:dict):
-        pass
-    
+        if 'err' not in check_document('users',{'email':data['email']},isSingle=True):
+            return 'email is already used'
+        db_model.db['users'].insert_one(data)
+        return 'success'
+
     def get_user(filter:dict,isSingle=True):
         pass
     

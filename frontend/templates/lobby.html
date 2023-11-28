@@ -30,9 +30,21 @@
                     <ion-icon name="people" style="font-size: 20px;"></ion-icon>
                     <h5 class="mt-2 ms-3" style="font-weight: 800;">社群</h5>
                 </div>
-                <div class="side_card d-flex align-items-center justify-content-start ps-4 w-100 mt-1">
+                <div class="side_card d-flex align-items-center justify-content-start ps-4 w-100 mt-1 mb-1">
                     <ion-icon name="cloud-upload" style="font-size: 20px;"></ion-icon>
                     <h5 class="mt-2 ms-3" style="font-weight: 800;">上傳</h5>
+                </div>
+                <hr style="border:solid 1px white !important;">
+                <div class="side_card d-flex align-items-center justify-content-start ps-4 w-100 mt-1"
+                    data-bs-toggle="modal" data-bs-target="#Login_Modal">
+                    <ion-icon name="person-circle" style="font-size: 20px;"></ion-icon>
+                    <h5 class="mt-2 ms-3" style="font-weight: 800;">登入</h5>
+                </div>
+
+                <div class="side_card d-flex align-items-center justify-content-start ps-4 w-100 mt-1"
+                    data-bs-toggle="modal" data-bs-target="#Login_Modal">
+                    <ion-icon name="person-add" style="font-size: 20px;"></ion-icon>
+                    <h5 class="mt-2 ms-3" style="font-weight: 800;">註冊</h5>
                 </div>
 
             </div>
@@ -81,6 +93,64 @@
 
             </div>
         </div>
+
+        <!-- Modal For Login -->
+        <div class="modal fade" id="Login_Modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content main-body position-relative">
+                    <button type="button" class="btn-close btn-close-white position-absolute end-0 m-2"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col-md-5 col-12 text-md-start text-center mt-md-0 mt-5">
+                            <h1 style="color: hsl(218, 81%, 95%)">ONLINE PLAYGROUND</h1>
+                            <h2 style="color: hsl(218, 81%, 75%)">The Best Game Website</h2>
+                        </div>
+                        <div class="col-md-4 col-12 py-md-5 position-relative text-center">
+                            <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
+                            <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
+                            <div class="middle-board p-5 rounded-2 mt-5">
+                                <h2 class="text-center" style="font-weight:600;">歡迎回來</h2>
+                                <div id="message" class="alert alert-danger mb-0" style="display: none;"></div>
+                                <div class="form-floating mb-3 mt-5">
+                                    <input type="text" class="form-control" id="username"
+                                        placeholder="name@example.com">
+                                    <label for="floatingInput">請輸入帳號</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input type="password" class="form-control" id="password" placeholder="Password">
+                                    <label for="floatingPassword">請輸入密碼</label>
+                                </div>
+                                <div class="form-check text-start pt-2">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
+                                        checked>
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                        記住我
+                                    </label>
+                                </div>
+                                <div class="rounded-2 p-2 mt-4 mb-5 login-button"
+                                    style="background-color:rgb(47,92,193); opacity:0.8;" type="submit"
+                                    id="login_button">
+                                    <b class="text-white text-center">登入 / 註冊</b>
+                                </div>
+                                <hr class="hr">
+                                <ion-icon name="logo-google" class="icon-button" style="color:gray;"></ion-icon>
+                                <ion-icon name="logo-facebook" class="ms-3 icon-button" style="color:gray;"></ion-icon>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Understood</button>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <footer>
@@ -96,6 +166,7 @@
         </script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="/static/js/ajax.js"></script>
 </body>
 
 </html>
