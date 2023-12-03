@@ -13,7 +13,9 @@ app.config['SECRET_KEY'] = os.urandom(16).hex()
 app.config['DEBUG']=True
 socketio = SocketIO(app, cors_allowed_origins="*")
 CORS(app,resources={r"*": {"origins": "*"}})
-Api(app)
+api=Api(app)
+api.add_resource(RoomAPI,'/api/room')
+
 
 times=0
 userlist=[]
