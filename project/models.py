@@ -63,6 +63,9 @@ class User:
     
     def delete_user(filter:dict,isSingle=True):
         pass
+    
+    def connect_user():
+        pass
 
 
 class Session():
@@ -193,13 +196,17 @@ class Game():#a room is settled for handling a game
     def create_game(args:dict):#name repetenot yet
         data={
             '_id':"G"+str(time.time())[-5:],#6碼
-            "name":args['name'],
+            "name":args['game_name'],
             "author":args['author'],
             'description':args['description'],
             'users_number':args['users_number'],
             'sync_mode':args['sync_mode'],
             'sync_variables':args['sync_variables']#need check as a list
         }
+        same_name=db_model.db['games'].find({'name':args['game_name']})
+        if same_name:
+            return {'err':'the name existed!'}
+        
         result=db_model.db['games'].insert_one(data)
         return f"{result.inserted_id} created!"
     

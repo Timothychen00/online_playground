@@ -3,6 +3,7 @@ from flask_socketio import SocketIO,send,emit,join_room, leave_room,disconnect
 import random,json,os
 from flask_restful import Api,Resource
 from flask_cors import CORS
+from project.models import *
 from project.api import UserAPI,SessionAPI,GameAPI,RoomAPI
 from dotenv import load_dotenv
 from project.models import db_model
@@ -38,6 +39,7 @@ def handle_message(data):
 @socketio.on('connect')
 def handle_connect():
     global userlist
+    User.
     print(request.sid)
     
 @socketio.on('join')
