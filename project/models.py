@@ -57,6 +57,8 @@ class User:
         return 'success'
 
     def get_user(filter:dict,isSingle=True):
+        # db_model.db['users'].delete_many({})
+        # print(list(db_model.db['users'].find({})))
         pass
     
     def edit_user(filter:dict,data:dict):
@@ -70,8 +72,12 @@ class Session():
     def get_session():
         pass
     
-    def login_session(args):
-        pass
+    def login_session(data:dict):
+        if 'err'  in check_document('users',{'email':data['email']},isSingle=True):
+            return 'none_email_is_found'
+        if 'err' not in check_document('users',{'email':data['email'],'password':data['password']},isSingle=True):
+            return db_model.db['users'].find_one({'email':data['email']})
+        return 'wrong_password'
     
     def clear_session():
         pass

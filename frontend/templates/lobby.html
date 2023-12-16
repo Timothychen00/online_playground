@@ -30,23 +30,36 @@
                     <ion-icon name="people" style="font-size: 20px;"></ion-icon>
                     <h5 class="mt-2 ms-3" style="font-weight: 800;">社群</h5>
                 </div>
-                <div class="side_card d-flex align-items-center justify-content-start ps-4 w-100 mt-1 mb-1">
+                <div class="side_card d-flex align-items-center justify-content-start ps-4 w-100 mt-1 mb-1"
+                    data-bs-toggle="modal" data-bs-target="#Upload_Modal">
                     <ion-icon name="cloud-upload" style="font-size: 20px;"></ion-icon>
                     <h5 class="mt-2 ms-3" style="font-weight: 800;">上傳</h5>
                 </div>
                 <hr style="border:solid 1px white !important;">
                 <div class="side_card d-flex align-items-center justify-content-start ps-4 w-100 mt-1"
-                    data-bs-toggle="modal" data-bs-target="#Login_Modal">
+                    data-bs-toggle="modal" data-bs-target="#Login_Modal" id="login_selection">
                     <ion-icon name="person-circle" style="font-size: 20px;"></ion-icon>
                     <h5 class="mt-2 ms-3" style="font-weight: 800;">登入</h5>
                 </div>
 
                 <div class="side_card d-flex align-items-center justify-content-start ps-4 w-100 mt-1"
-                    data-bs-toggle="modal" data-bs-target="#Login_Modal">
+                    data-bs-toggle="modal" data-bs-target="#Login_Modal" id="username_selection">
+                    <ion-icon name="person-circle" style="font-size: 20px;"></ion-icon>
+                    <h5 class="mt-2 ms-3" style="font-weight: 800;" id="username_selection_text"></h5>
+                </div>
+
+                <div class="side_card d-flex align-items-center justify-content-start ps-4 w-100 mt-1"
+                    data-bs-toggle="modal" data-bs-target="#Login_Modal" id="logout_selection">
+                    <ion-icon name="log-in" style="font-size: 20px;"></ion-icon>
+                    <h5 class="mt-2 ms-3" style="font-weight: 800;">登出</h5>
+                </div>
+
+
+                <div class="side_card d-flex align-items-center justify-content-start ps-4 w-100 mt-1"
+                    data-bs-toggle="modal" data-bs-target="#Register_Modal" id="register_selection">
                     <ion-icon name="person-add" style="font-size: 20px;"></ion-icon>
                     <h5 class="mt-2 ms-3" style="font-weight: 800;">註冊</h5>
                 </div>
-
             </div>
             <div class="col-10 color_light_purple">
                 <img src="/static/img/platform.jpg" alt="" class="img-fluid img_platform mt-4">
@@ -65,9 +78,11 @@
                                     Design By TimothyChen.
                                 </p>
                             </div>
-                            <div class="side_card active d-flex align-items-center justify-content-center w-100 mt-1">
+                            <div class="side_card active d-flex align-items-center justify-content-center w-100 mt-1"
+                                onclick="location.href='/each-game'">
                                 <ion-icon name="play" style="font-size: 20px;"></ion-icon>
-                                <h5 class="mt-2 ms-1" style="font-weight: 800;">開始遊戲</h5>
+                                <h5 class="mt-2 ms-1" style="font-weight: 800;">
+                                    開始遊戲</h5>
                             </div>
                         </div>
                     </div>
@@ -83,9 +98,11 @@
                                     Design By TimothyChen.
                                 </p>
                             </div>
-                            <div class="side_card active d-flex align-items-center justify-content-center w-100 mt-1">
+                            <div class="side_card active d-flex align-items-center justify-content-center w-100 mt-1"
+                                onclick="location.href='/each-game'">
                                 <ion-icon name="play" style="font-size: 20px;"></ion-icon>
-                                <h5 class="mt-2 ms-1" style="font-weight: 800;">開始遊戲</h5>
+                                <h5 class="mt-2 ms-1" style="font-weight: 800;">
+                                    開始遊戲</h5>
                             </div>
                         </div>
                     </div>
@@ -93,6 +110,43 @@
 
             </div>
         </div>
+
+        <!-- modal for upload a game -->
+        <div class=" modal fade" id="Upload_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5 fw-semibold" id="exampleModalLabel">上傳遊戲
+                        </h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label fw-semibold">遊戲名稱</label>
+                            <input class="form-control" type="text" placeholder="" aria-label="default input example"
+                                id="game_name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label fw-semibold">遊戲圖片</label>
+                            <form id="imgur">
+                                <input class="form-control form-control-lg imgur fs-6 fw-semibold" id="formFileLg"
+                                    type="file" required accept="image/*" data-max-size="5000" />
+                            </form>
+                        </div>
+                        <div class="form-floating mt-4">
+                            <textarea class="form-control" placeholder="Leave a comment here" id="game_description"
+                                style="height: 100px"></textarea>
+                            <label for="floatingTextarea2" class="fw-semibold">遊戲介紹</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-primary" id="upload_game_button">上傳遊戲</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         <!-- Modal For Login -->
         <div class="modal fade" id="Login_Modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -108,14 +162,14 @@
                         </div>
                         <div class="col-md-4 col-12 py-md-5 position-relative text-center">
                             <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
-                            <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
+                            <div id="radius-shape-2" class="position-absolute shadow-5-strong">
+                            </div>
                             <div class="middle-board p-5 rounded-2 mt-5">
                                 <h2 class="text-center" style="font-weight:600;">歡迎回來</h2>
                                 <div id="message" class="alert alert-danger mb-0" style="display: none;"></div>
                                 <div class="form-floating mb-3 mt-5">
-                                    <input type="text" class="form-control" id="username"
-                                        placeholder="name@example.com">
-                                    <label for="floatingInput">請輸入帳號</label>
+                                    <input type="email" class="form-control" id="email" placeholder="name@example.com">
+                                    <label for="floatingInput">請輸入電子郵件</label>
                                 </div>
                                 <div class="form-floating">
                                     <input type="password" class="form-control" id="password" placeholder="Password">
@@ -131,7 +185,7 @@
                                 <div class="rounded-2 p-2 mt-4 mb-5 login-button"
                                     style="background-color:rgb(47,92,193); opacity:0.8;" type="submit"
                                     id="login_button">
-                                    <b class="text-white text-center">登入 / 註冊</b>
+                                    <b class="text-white text-center">登入</b>
                                 </div>
                                 <hr class="hr">
                                 <ion-icon name="logo-google" class="icon-button" style="color:gray;"></ion-icon>
@@ -151,6 +205,69 @@
             </div>
         </div>
 
+        <!-- Modal For Register -->
+        <div class="modal fade" id="Register_Modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content main-body position-relative">
+                    <button type="button" class="btn-close btn-close-white position-absolute end-0 m-2"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col-md-5 col-12 text-md-start text-center mt-md-0 mt-5">
+                            <h1 style="color: hsl(218, 81%, 95%)">ONLINE PLAYGROUND</h1>
+                            <h2 style="color: hsl(218, 81%, 75%)">The Best Game Website</h2>
+                        </div>
+                        <div class="col-md-4 col-12 py-md-5 position-relative text-center">
+                            <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
+                            <div id="radius-shape-2" class="position-absolute shadow-5-strong">
+                            </div>
+                            <div class="middle-board p-5 rounded-2 mt-5">
+                                <h2 class="text-center" style="font-weight:600;">歡迎註冊</h2>
+                                <div id="register_message" class="alert alert-danger mb-0" style="display: none;">
+                                </div>
+                                <div class="form-floating mb-3 mt-5">
+                                    <input type="email" class="form-control" id="register_username"
+                                        placeholder="name@example.com">
+                                    <label for="floatingInput">請輸入名稱</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="email" class="form-control" id="register_email"
+                                        placeholder="name@example.com">
+                                    <label for="floatingInput">請輸入電子郵件</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control" id="register_password"
+                                        placeholder="Password">
+                                    <label for="floatingPassword">請輸入密碼</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input type="password" class="form-control" id="register_password_check"
+                                        placeholder="Password">
+                                    <label for="floatingPassword">請再次輸入密碼</label>
+                                </div>
+                                <div class="rounded-2 p-2 mt-4 mb-5 login-button"
+                                    style="background-color:rgb(47,92,193); opacity:0.8;" type="submit"
+                                    id="register_button">
+                                    <b class="text-white text-center">註冊</b>
+                                </div>
+                                <hr class="hr">
+                                <ion-icon name="logo-google" class="icon-button" style="color:gray;"></ion-icon>
+                                <ion-icon name="logo-facebook" class="ms-3 icon-button" style="color:gray;"></ion-icon>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 
+                            <div class="modal-body">
+                                ...
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Understood</button>
+                            </div> -->
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <footer>
@@ -166,7 +283,12 @@
         </script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/static/js/ajax.js"></script>
+    <script src="/static/js/login.js"></script>
+    <script src="/static/js/register.js"></script>
+    <script src="/static/js/image.js"></script>
+    <script src="/static/js/upload_game.js"></script>
 </body>
 
 </html>

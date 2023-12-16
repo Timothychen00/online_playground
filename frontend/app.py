@@ -12,6 +12,10 @@ def home():
 def lobby():
     return render_template("lobby.html")
 
+@app.route("/each-game")
+def game():
+    return render_template("each-game.html")
+
 @app.route("/debug")
 def debug():
     return render_template("debug.html")
