@@ -1,0 +1,85 @@
+{% extends 'lobby.html' %}
+{% block main_content %}
+<div class="col-10 color_light_purple d-inline-flex justify-content-center pt-5 text-center pb-5">
+
+
+
+    <form class="mt-5 col-6 p-5 card d-inline-flex justify-content-center text-start mb-5 shadow shadow-lg " action="http://127.0.0.1:5300/api/game" method="post">
+        <div class="text-center h4 d-block ">
+            <h4>
+                Create A Game
+            </h4>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label h6">遊戲名稱</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label h6">作者</label>
+            <input type="text" class="form-control" id="exampleInputPassword1">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label h6">遊戲說明</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label h6">玩家人數</label>
+            <input type="number" class="form-control" id="exampleInputPassword1">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label h6">同步模式</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label h6">同步變數</label>
+            <input type="text" class="form-control" id="exampleInputPassword1">
+        </div>
+        <!-- <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label h6" for="exampleCheck1">同意條款</label>
+        </div> -->
+        <div class="mb-3">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                上傳遊戲
+            </button>
+        </div>
+        <div class="mb-3 form-check">
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Submit</button>
+        </div>
+
+    </form>
+
+
+
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">上傳遊戲</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="height: 30vh;">
+                    <div class="container-dragger">
+                        <input type="file" id="upload-button" multiple accept="image/*" />
+                        <label for="upload-button" class="drag-label"><i class="fa-solid fa-upload"></i>&nbsp;
+                            Choose Or Drop Files
+                        </label>
+                        <div id="error"></div>
+                        <div id="image-display"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">送出</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function upload(){
+
+        }
+    </script>
+    {% endblock main_content %}

@@ -41,10 +41,11 @@ from project.decorators import *
 # )
 # )
 db_model.cachable=True
+print(db_model.cache)
 @timing
 def speed_test():
     for i in range(1000):
         
-        Room.get_room({'status':'waiting'},isSingle=False)
+        print(Room.get_room({'status':'waiting'},isSingle=False))
 speed_test()
 

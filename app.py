@@ -4,6 +4,7 @@ from flask.sessions import SecureCookieSessionInterface
 import random,json,os
 from flask_restful import Api,Resource
 from flask_cors import CORS
+from project.models import *
 from project.api import UserAPI,SessionAPI,GameAPI,RoomAPI
 from dotenv import load_dotenv
 from datetime import timedelta
@@ -11,13 +12,14 @@ from project.models import db_model
 load_dotenv()
 
 app = Flask(__name__)
-session_cookie = SecureCookieSessionInterface().get_signing_serializer(app)
+
+# session_cookie = SecureCookieSessionInterface().get_signing_serializer(app)
 
 app.config['SECRET_KEY'] = os.urandom(16).hex()
 app.config['DEBUG']=True
 socketio = SocketIO(app, cors_allowed_origins="*")
 CORS(app,resources={r"*": {"origins": "*"}})
-CORS(app, supports_credentials=True)
+# CORS(app, supports_credentials=True)
 api=Api(app)
 api.add_resource(UserAPI,'/api/user')
 api.add_resource(SessionAPI,'/api/session')
@@ -49,6 +51,7 @@ def handle_message(data):
 @socketio.on('connect')
 def handle_connect():
     global userlist
+    # User.
     print(request.sid)
     
 @socketio.on('join')

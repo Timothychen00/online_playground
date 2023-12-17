@@ -11,6 +11,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
 </head>
 
 <body>
@@ -18,7 +20,7 @@
         <div class="row text-center" style="height: 100vh;">
             <div class="col-2 color_dark_purple">
                 <img class="img-fluid mt-3" src="/static/img/playground.png" alt="">
-                <div class="side_card active d-flex align-items-center justify-content-start ps-4 w-100 mt-3">
+                <div class="side_card active d-flex align-items-center justify-content-start ps-4 w-100 mt-3" onclick="location.href='/'">
                     <ion-icon name="home" style="font-size: 20px;"></ion-icon>
                     <h5 class="mt-2 ms-3" style="font-weight: 800;">主頁</h5>
                 </div>
@@ -30,8 +32,13 @@
                     <ion-icon name="people" style="font-size: 20px;"></ion-icon>
                     <h5 class="mt-2 ms-3" style="font-weight: 800;">社群</h5>
                 </div>
+<!-- <<<<<<< UI -->
                 <div class="side_card d-flex align-items-center justify-content-start ps-4 w-100 mt-1 mb-1"
                     data-bs-toggle="modal" data-bs-target="#Upload_Modal">
+<!-- ======= -->
+<!--                 <div class="side_card d-flex align-items-center justify-content-start ps-4 w-100 mt-1"
+                    onclick="location.href='/create_game'"> -->
+<!-- >>>>>>> main -->
                     <ion-icon name="cloud-upload" style="font-size: 20px;"></ion-icon>
                     <h5 class="mt-2 ms-3" style="font-weight: 800;">上傳</h5>
                 </div>
@@ -61,7 +68,11 @@
                     <h5 class="mt-2 ms-3" style="font-weight: 800;">註冊</h5>
                 </div>
             </div>
-            <div class="col-10 color_light_purple">
+          
+          
+            {% block main_content %}
+
+             <div class="col-10 color_light_purple">
                 <img src="/static/img/platform.jpg" alt="" class="img-fluid img_platform mt-4">
                 <h4 class="text-white text_800 text-start mt-5 ms-5">推薦遊戲</h4>
 
@@ -205,6 +216,7 @@
             </div>
         </div>
 
+<!-- <<<<<<< UI -->
         <!-- Modal For Register -->
         <div class="modal fade" id="Register_Modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -265,6 +277,16 @@
                                 <button type="button" class="btn btn-primary">Understood</button>
                             </div> -->
                 </div>
+<!-- ======= -->
+<!--             </div>  -->
+
+
+<!--             {% endblock main_content %} -->
+
+
+
+
+<!-- >>>>>>> main -->
             </div>
         </div>
 
@@ -281,6 +303,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
         integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
         </script>
+    <script src="/static/js/drag.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
