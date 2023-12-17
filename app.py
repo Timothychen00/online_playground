@@ -1,5 +1,6 @@
 from flask import Flask, render_template,request,jsonify,session
 from flask_socketio import SocketIO,send,emit,join_room, leave_room,disconnect
+from flask.sessions import SecureCookieSessionInterface
 import random,json,os
 from flask_restful import Api,Resource
 from flask_cors import CORS
@@ -12,11 +13,13 @@ load_dotenv()
 
 app = Flask(__name__)
 
+# session_cookie = SecureCookieSessionInterface().get_signing_serializer(app)
 
-app.config['SECRET_KEY'] = 'os.urandom(16).hex()'
+app.config['SECRET_KEY'] = os.urandom(16).hex()
 app.config['DEBUG']=True
 socketio = SocketIO(app, cors_allowed_origins="*")
 CORS(app,resources={r"*": {"origins": "*"}})
+# CORS(app, supports_credentials=True)
 api=Api(app)
 api.add_resource(UserAPI,'/api/user')
 api.add_resource(SessionAPI,'/api/session')

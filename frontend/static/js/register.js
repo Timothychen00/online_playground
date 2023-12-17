@@ -29,7 +29,7 @@ $(document).ready(function () {
                         console.log(data.message);
                         if (data.message == "success") {
                             alert("註冊成功");
-                            window.location.href = "/";
+                            window.location.href = "/lobby";
                         }
                         else if (data.message == "email is already used") {
                             $("#register_message").text("該電子郵件已經被使用").show();

@@ -23,7 +23,7 @@ $(document).ready(function () {
                     console.log(data.message);
                     if (data.message == "success") {
                         alert("登入成功");
-                        window.location.href = "/";
+                        window.location.href = "/lobby";
                     }
                     else {
                         $("#message").text(data.message).show();
