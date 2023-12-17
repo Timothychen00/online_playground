@@ -15,7 +15,7 @@ app = Flask(__name__)
 
 # session_cookie = SecureCookieSessionInterface().get_signing_serializer(app)
 
-app.config['SECRET_KEY'] = os.urandom(16).hex()
+app.config['SECRET_KEY'] = 'os.urandom(16).hex()'
 app.config['DEBUG']=True
 socketio = SocketIO(app, cors_allowed_origins="*")
 CORS(app,resources={r"*": {"origins": "*"}})

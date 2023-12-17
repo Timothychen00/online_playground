@@ -11,7 +11,9 @@ function choice() {
 
 function setup() {
   var canvas = createCanvas(800, 600);
+
   canvas.parent('container');
+  
   x = width / 2;
   y = height / 2;
   speedx = 0;
@@ -50,8 +52,8 @@ function draw() {
     if (flg === 0) {
       player1_score++;
       // add_score(1);
-      window.msg='countdown';
-      countdown_animation(3,'delay',callback=ball);
+      window.msg = 'countdown';
+      countdown_animation(3, 'delay', callback = ball);
       flg = 1;
     }
   }
@@ -73,8 +75,8 @@ function draw() {
     if (flg === 0) {
       player2_score++;
       // add_score(2);
-      window.msg='countdown';
-      countdown_animation(3,'delay',callback=ball);
+      window.msg = 'countdown';
+      countdown_animation(3, 'delay', callback = ball);
       flg = 1;
     }
   }
@@ -100,6 +102,6 @@ function ball() {
   speedx = Math.floor(Math.random() * 3 + 5) * choice();
   speedy = Math.floor(Math.random() * 3 + 5) * choice();
   flg = 0;
- 
-  
+
+
 }
