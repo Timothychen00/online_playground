@@ -1,6 +1,6 @@
 from pymongo.mongo_client import MongoClient
 from dotenv import load_dotenv
-import os,time
+import os,time,json
 from project.decorators import timing
 import random
 load_dotenv()
@@ -53,9 +53,14 @@ def check_document(collection='users',key_value={},isSingle:bool=True):# 返回�
 
 class User:
     def create_user(data:dict):
-        pass
-    
+        if 'err' not in check_document('users',{'email':data['email']},isSingle=True):
+            return 'email is already used'
+        db_model.db['users'].insert_one(data)
+        return 'success'
+
     def get_user(filter:dict,isSingle=True):
+        # db_model.db['users'].delete_many({})
+        # print(list(db_model.db['users'].find({})))
         pass
     
     def edit_user(filter:dict,data:dict):
@@ -72,8 +77,12 @@ class Session():
     def get_session():
         pass
     
-    def login_session(args):
-        pass
+    def login_session(data:dict):
+        if 'err'  in check_document('users',{'email':data['email']},isSingle=True):
+            return 'none_email_is_found'
+        if 'err' not in check_document('users',{'email':data['email'],'password':data['password']},isSingle=True):
+            return db_model.db['users'].find_one({'email':data['email']})
+        return 'wrong_password'
     
     def clear_session():
         pass

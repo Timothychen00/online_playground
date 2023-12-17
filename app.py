@@ -1,27 +1,38 @@
 from flask import Flask, render_template,request,jsonify,session
 from flask_socketio import SocketIO,send,emit,join_room, leave_room,disconnect
+from flask.sessions import SecureCookieSessionInterface
 import random,json,os
 from flask_restful import Api,Resource
 from flask_cors import CORS
 from project.models import *
 from project.api import UserAPI,SessionAPI,GameAPI,RoomAPI
 from dotenv import load_dotenv
+from datetime import timedelta
 from project.models import db_model
 load_dotenv()
 
 app = Flask(__name__)
+
+# session_cookie = SecureCookieSessionInterface().get_signing_serializer(app)
+
 app.config['SECRET_KEY'] = os.urandom(16).hex()
 app.config['DEBUG']=True
 socketio = SocketIO(app, cors_allowed_origins="*")
 CORS(app,resources={r"*": {"origins": "*"}})
+# CORS(app, supports_credentials=True)
 api=Api(app)
-api.add_resource(RoomAPI,'/api/room')
+api.add_resource(UserAPI,'/api/user')
+api.add_resource(SessionAPI,'/api/session')
 api.add_resource(GameAPI,'/api/game')
-
 
 times=0
 userlist=[]
 temp_id=None
+
+@app.before_request
+def before_request():
+    session.permanent = True
+    app.permanent_session_lifetime = timedelta(days=30)  # 設定 session 的有效期限
 
 @socketio.on('sync')
 def handle_message(data):

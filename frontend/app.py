@@ -19,6 +19,10 @@ def create():
     return render_template("create_game.html")
 
 
+@app.route("/each-game")
+def game():
+    return render_template("each-game.html")
+
 @app.route("/debug")
 def debug():
     return render_template("debug.html")
