@@ -20,7 +20,7 @@
         <div class="row text-center" style="height: 100vh;">
             <div class="col-2 color_dark_purple">
                 <img class="img-fluid mt-3" src="/static/img/playground.png" alt="">
-                <div class="side_card active d-flex align-items-center justify-content-start ps-4 w-100 mt-3">
+                <div class="side_card active d-flex align-items-center justify-content-start ps-4 w-100 mt-3" onclick="location.href='/'">
                     <ion-icon name="home" style="font-size: 20px;"></ion-icon>
                     <h5 class="mt-2 ms-3" style="font-weight: 800;">主頁</h5>
                 </div>
@@ -33,15 +33,15 @@
                     <h5 class="mt-2 ms-3" style="font-weight: 800;">社群</h5>
                 </div>
                 <div class="side_card d-flex align-items-center justify-content-start ps-4 w-100 mt-1"
-                    onclick="upload_page()">
+                    onclick="location.href='/create_game'">
                     <ion-icon name="cloud-upload" style="font-size: 20px;"></ion-icon>
                     <h5 class="mt-2 ms-3" style="font-weight: 800;">上傳</h5>
                 </div>
 
             </div>
+            {% block main_content %}
 
-
-            <!-- <div class="col-10 color_light_purple">
+             <div class="col-10 color_light_purple">
                 <img src="/static/img/platform.jpg" alt="" class="img-fluid img_platform mt-4">
                 <h4 class="text-white text_800 text-start mt-5 ms-5">推薦遊戲</h4>
 
@@ -84,78 +84,10 @@
                     </div>
                 </div>
 
-            </div> -->
+            </div> 
 
 
-            <div class="col-10 color_light_purple d-inline-flex justify-content-center pt-5">
-                <form class="mt-5">
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Game Name</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Author</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Description</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">user_number</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">sync_mode</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">sync_variable</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1">
-                    </div>
-                    <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Description</label>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-
-                <div class="col-2">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Launch demo modal
-                </button>
-            </div>
-
-
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body" style="height: 40vh;">
-                                <div class="container">
-                                    <input type="file" id="upload-button" multiple accept="image/*" />
-                                    <label for="upload-button" class="drag-label"><i
-                                            class="fa-solid fa-upload"></i>&nbsp; Choose Or Drop Photos
-                                    </label>
-                                    <div id="error"></div>
-                                    <div id="image-display"></div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            {% endblock main_content %}
 
 
 

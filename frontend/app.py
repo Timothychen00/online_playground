@@ -6,11 +6,18 @@ app.secret_key=os.urandom(16).hex()
 
 @app.route("/")
 def home():
-    return render_template("processing.html")
+    return render_template("lobby.html")
+    
 
 @app.route("/lobby")
 def lobby():
-    return render_template("lobby.html")
+    return render_template("processing.html")
+    
+
+@app.route("/create_game")
+def create():
+    return render_template("create_game.html")
+
 
 @app.route("/debug")
 def debug():

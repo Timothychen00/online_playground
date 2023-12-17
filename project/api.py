@@ -81,15 +81,16 @@ class GameAPI(Resource):
         self.parser.add_argument('users_number',type=str,location=['values'],action='append')
         self.parser.add_argument('sync_mode',type=str,location=['values'],action='append')
         self.parser.add_argument('sync_variavles',type=str,location=['values'],action='append')
-        self.parser.add_argument('code', type=werkzeug.datastructures.FileStorage, location='files')
+        self.parser.add_argument('code_file', type=werkzeug.datastructures.FileStorage, location='files')
         args = self.parser.parse_args()
-        for i in ['game_name','author','description','users_number','sync_mode','sync_variavles','code']:
-            if not args['game_name']:
-                return {'msg':i+' required!'},413
-        result=Game.create_game(args)
-        if 'err' in result:
-            return result,414
-        return result,200
+        print(args)
+        # for i in ['game_name','author','description','users_number','sync_mode','sync_variavles','code_file']:
+        #     if not args['game_name']:
+        #         return {'msg':i+' required!'},413
+        # result=Game.create_game(args)
+        # if 'err' in result:
+        #     return result,414
+        # return result,200
         
 
     def delete(self):

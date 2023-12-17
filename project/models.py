@@ -202,6 +202,7 @@ class Game():#a room is settled for handling a game
             'users_number':args['users_number'],
             'sync_mode':args['sync_mode'],
             'sync_variables':args['sync_variables']#need check as a list
+            # 'code'
         }
         same_name=db_model.db['games'].find({'name':args['game_name']})
         if same_name:

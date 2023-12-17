@@ -16,6 +16,7 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 CORS(app,resources={r"*": {"origins": "*"}})
 api=Api(app)
 api.add_resource(RoomAPI,'/api/room')
+api.add_resource(GameAPI,'/api/game')
 
 
 times=0
@@ -39,7 +40,7 @@ def handle_message(data):
 @socketio.on('connect')
 def handle_connect():
     global userlist
-    User.
+    # User.
     print(request.sid)
     
 @socketio.on('join')
