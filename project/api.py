@@ -75,32 +75,47 @@ class GameAPI(Resource):
     # use for addition requirements(put,get,post)
     # parser.add_argument('name',type=str,location=['values'])
     parser.add_argument('image_url',type=str,location=['values'])
-    self.parser.add_argument('game_name',type=str,location=['values'],action='append')
-    self.parser.add_argument('author',type=str,location=['values'],action='append')
-    self.parser.add_argument('description',type=str,location=['values'],action='append')
-    self.parser.add_argument('users_number',type=str,location=['values'],action='append')
-    self.parser.add_argument('sync_mode',type=str,location=['values'],action='append')
-    self.parser.add_argument('sync_variavles',type=str,location=['values'],action='append')
-    self.parser.add_argument('code_file', type=werkzeug.datastructures.FileStorage, location='files')
+    parser.add_argument('game_name',type=str,location=['values'])
+    parser.add_argument('author',type=str,location=['values'])
+    parser.add_argument('description',type=str,location=['values'])
+    parser.add_argument('users_number',type=str,location=['values'])
+    parser.add_argument('sync_mode',type=str,location=['values'])
+    parser.add_argument('sync_variavles',type=str,location=['values'],action='append')
+    # parser.add_argument('code_file', type=str, location=['values','json'])
+    parser.add_argument('isSingle', type=str, location='values')
+
     def get(self):
         self.parser.add_argument('game_name',type=str,location=['values'],action='append')
         args = self.parser.parse_args()
-        result=Game.get_game({'name':args['game_name']})
+        
+
+        
+        if args['isSingle']=='False':
+            result=Game.get_game({},isSingle=False)
+        else:
+            result=Game.get_game({'name':args['game_name']},isSingle=True)
+        print(result)
         if 'err' in result:
             return result,414
         return result,200
     
     
     def post(self):
-        args = self.parser.parse_args()
-        print(args)
-        # for i in ['game_name','author','description','users_number','sync_mode','sync_variavles','code_file']:
-        #     if not args['game_name']:
-        #         return {'msg':i+' required!'},413
-        # result=Game.create_game(args)
-        # if 'err' in result:
-        #     return result,414
-        # return result,200
+        print('send')
+        data=request.get_json()
+        print(data)
+
+        result=Game.create_game(data)
+        print(result)
+        if 'err' in result:
+            return result,414
+        with open('project/games/'+result.split()[0]+'.pde', 'w+') as f:
+            f.write(data['code_file'])
+        for i in ['game_name','author','description','users_number','sync_mode','sync_variavles','code_file']:
+            if not data['game_name']:
+                return {'msg':i+' required!'},413
+        
+        return result,200
         
     def delete(self):
         pass
@@ -162,4 +177,4 @@ class RoomAPI(Resource):
         elif args['action']=='leave':
             result=Room.leave_room(args['roomid'],args['sid'])
             
-        
+

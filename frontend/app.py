@@ -1,12 +1,14 @@
 from flask import Flask,render_template
 import os
-
+from flask_cors import CORS
 app=Flask(__name__)
-app.secret_key=os.urandom(16).hex()
-
+app.secret_key='os.urandom(16).hex()'
+CORS(app,resources={r"*": {"origins": "*"}})
+# CORS(app, supports_credentials=True)
 @app.route("/")
 def home():
     return render_template("lobby.html")
+
     
 
 @app.route("/lobby")
@@ -26,6 +28,14 @@ def game():
 @app.route("/debug")
 def debug():
     return render_template("debug.html")
+
+@app.route("/test_game")
+def test_game():
+    return render_template("test_game.html")
+
+@app.route("/games/<id>")
+def games(id):
+    return render_template("each-game.html",id=id)
 
 
 if __name__=='__main__':

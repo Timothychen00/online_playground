@@ -210,10 +210,12 @@ class Game():#a room is settled for handling a game
             'description':args['description'],
             'users_number':args['users_number'],
             'sync_mode':args['sync_mode'],
+            'img_url':args['img_url'],
             'sync_variables':args['sync_variables']#need check as a list
             # 'code'
         }
-        same_name=db_model.db['games'].find({'name':args['game_name']})
+        same_name=list(db_model.db['games'].find({'name':args['game_name']}))
+        print(same_name)
         if same_name:
             return {'err':'the name existed!'}
         
