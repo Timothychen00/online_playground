@@ -38,7 +38,7 @@ console.log('text');
 // 顯示更多資訊
 $('.square').hover(function () {
     $('.more_information').show();
-    $('.square').height('260px');
+    $('.square').height('90px');
 }).mouseleave(function () {
     $('.square').height('50px');
     $('.more_information').hide();

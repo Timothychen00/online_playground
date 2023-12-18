@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Title</title>
+    <title>遊戲大廳</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -17,28 +17,49 @@
 
 <body>
     <div class="container-fluid" style="height: 100vh;">
+        <div class="toast-container position-absolute p-3 top-0 end-0" id="toastPlacement"
+            data-original-class="toast-container position-absolute p-3" style="z-index:99; display:none;">
+            <div class="toast fade show end-0" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <svg class="bd-placeholder-img rounded me-2" width="20" height="20"
+                        xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice"
+                        focusable="false">
+                        <rect width="100%" height="100%" fill="red"></rect>
+                    </svg>
+                    <strong class="me-auto">系統通知</strong>
+                    <small>當前</small>
+                    <button type="button" class="btn-close" id="close_button"></button>
+                </div>
+                <div class="toast-body" style="background-color: white; font-weight:700;">
+                    此功能尚未開放
+                </div>
+            </div>
+        </div>
         <div class="row text-center" style="height: 100vh;">
             <div class="col-2 color_dark_purple">
                 <img class="img-fluid mt-3" src="/static/img/playground.png" alt="">
-                <div class="side_card active d-flex align-items-center justify-content-start ps-4 w-100 mt-3" onclick="location.href='/'">
+                <div class="side_card active d-flex align-items-center justify-content-start ps-4 w-100 mt-3"
+                    onclick="location.href='/'">
                     <ion-icon name="home" style="font-size: 20px;"></ion-icon>
                     <h5 class="mt-2 ms-3" style="font-weight: 800;">主頁</h5>
                 </div>
-                <div class="side_card d-flex align-items-center justify-content-start ps-4 w-100 mt-1">
+                <div class="side_card d-flex align-items-center justify-content-start ps-4 w-100 mt-1"
+                    onclick="location.href='#game_intro'">
                     <ion-icon name="game-controller" style="font-size: 20px;"></ion-icon>
                     <h5 class="mt-2 ms-3" style="font-weight: 800;">遊戲</h5>
                 </div>
-                <div class="side_card d-flex align-items-center justify-content-start ps-4 w-100 mt-1">
+                <div class="side_card d-flex align-items-center justify-content-start ps-4 w-100 mt-1"
+                    id="friend_button">
                     <ion-icon name="people" style="font-size: 20px;"></ion-icon>
                     <h5 class="mt-2 ms-3" style="font-weight: 800;">社群</h5>
                 </div>
-<!-- <<<<<<< UI -->
+                <!-- <<<<<<< UI -->
                 <!-- <div class="side_card d-flex align-items-center justify-content-start ps-4 w-100 mt-1 mb-1"
                     data-bs-toggle="modal" data-bs-target="#Upload_Modal"> -->
-<!-- ======= -->
+                <!-- ======= -->
                 <div class="side_card d-flex align-items-center justify-content-start ps-4 w-100 mt-1"
                     onclick="location.href='/create_game'">
-<!-- >>>>>>> main -->
+                    <!-- >>>>>>> main -->
                     <ion-icon name="cloud-upload" style="font-size: 20px;"></ion-icon>
                     <h5 class="mt-2 ms-3" style="font-weight: 800;">上傳</h5>
                 </div>
@@ -54,9 +75,8 @@
                     <ion-icon name="person-circle" style="font-size: 20px;"></ion-icon>
                     <h5 class="mt-2 ms-3" style="font-weight: 800;" id="username_selection_text"></h5>
                 </div>
-
                 <div class="side_card d-flex align-items-center justify-content-start ps-4 w-100 mt-1"
-                    data-bs-toggle="modal" data-bs-target="#Login_Modal" id="logout_selection">
+                    id="logout_selection" onclick="location.href='/logout'" style="cursor:pointer">
                     <ion-icon name="log-in" style="font-size: 20px;"></ion-icon>
                     <h5 class="mt-2 ms-3" style="font-weight: 800;">登出</h5>
                 </div>
@@ -68,15 +88,15 @@
                     <h5 class="mt-2 ms-3" style="font-weight: 800;">註冊</h5>
                 </div>
             </div>
-          
-          
+
+
             {% block main_content %}
 
-             <div class="col-10 color_light_purple" >
+            <div class="col-10 color_light_purple">
                 <img src="/static/img/platform.jpg" alt="" class="img-fluid img_platform mt-4">
-                <h4 class="text-white text_800 text-start mt-5 ms-5">推薦遊戲</h4>
+                <h4 class="text-white text_800 text-start mt-5 ms-5" id="game_intro">推薦遊戲</h4>
 
-                <div class="row mt-4 ps-5" id="games">
+                <div class="row mt-0 ps-5" id="games">
 
                 </div>
 
@@ -177,7 +197,7 @@
             </div>
         </div>
 
-<!-- <<<<<<< UI -->
+        <!-- <<<<<<< UI -->
         <!-- Modal For Register -->
         <div class="modal fade" id="Register_Modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -238,16 +258,16 @@
                                 <button type="button" class="btn btn-primary">Understood</button>
                             </div> -->
                 </div>
-<!-- ======= -->
-<!--             </div>  -->
+                <!-- ======= -->
+                <!--             </div>  -->
 
 
-<!--             {% endblock main_content %} -->
+                <!--             {% endblock main_content %} -->
 
 
 
 
-<!-- >>>>>>> main -->
+                <!-- >>>>>>> main -->
             </div>
         </div>
 
@@ -255,26 +275,26 @@
 
 
     <script>
-        fetch('http://127.0.0.1:5300/api/game?isSingle=False',{mode:'cors',method:'GET'})
-        .then((res)=>(res.json()))
-        .then((res)=>{
-            console.log(res)
-            game_inner=''
-            for(i=0;i<res.length;i++){
-                console.log(res[i]['img_url']);
-                game_inner+='                    \
-                <div class=\"card color_dark_purple text-white border-0 ms-2 px-0\"\
-                style="width:250px; height:350px ">\
-                <img class="card-img-top" src="'+res[i]['img_url']+'" alt="Card image cap"\
-                    style="height: 150px;">\
+        fetch('http://127.0.0.1:5300/api/game?isSingle=False', { mode: 'cors', method: 'GET' })
+            .then((res) => (res.json()))
+            .then((res) => {
+                console.log(res)
+                game_inner = ''
+                for (i = 0; i < res.length; i++) {
+                    console.log(res[i]['img_url']);
+                    game_inner += '                    \
+                <div class=\"card color_dark_purple text-white border-0 ms-2 px-0 mt-4\"\
+                style="width:250px; min-height:400px ">\
+                <img class="card-img-top" src="'+ res[i]['img_url'] + '" alt="Card image cap"\
+                    style="height: 170px;">\
                 <div class="card-body">\
-                    <div class="card-text">\
-                        <h5>'+res[i]['name']+'</h5>\
-                        <p>'+res[i]['description']+'</p>\
-                        <p>by: '+res[i]['author']+'</p>\
+                    <div class="card-text" style="height:190px;">\
+                        <h5>'+ res[i]['name'] + '</h5>\
+                        <p>'+ res[i]['description'] + '</p>\
+                        <p>by: '+ res[i]['author'] + '</p>\
                     </div>\
-                    <div class="side_card active d-flex align-items-center justify-content-center w-100 mt-1"\
-                        onclick="location.href=\'/games/'+res[i]['_id']+'\'\">\
+                    <div class="side_card active d-flex align-items-center justify-content-center w-100 mt-1 mb-2"\
+                        onclick="location.href=\'/games/'+ res[i]['_id'] + '\'\">\
                         <ion-icon name="play" style="font-size: 20px;"></ion-icon>\
                         <h5 class="mt-2 ms-1" style="font-weight: 800;">\
                             開始遊戲</h5>\
@@ -282,10 +302,10 @@
                 </div>\
             </div>'
 
-            }
+                }
 
-            document.getElementById('games').innerHTML+=game_inner;
-        })
+                document.getElementById('games').innerHTML += game_inner;
+            })
     </script>
     <!-- Bootstrap JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
