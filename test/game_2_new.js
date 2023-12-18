@@ -29,13 +29,13 @@ function check_can_move() {
 }
 let block_width = 82; let block_radius = 13; let animation_queue = []; //set the colors
 let g = 15; let click = 0; let x = [280 - 3 * g / 2, 360 - g / 2, 440 + g / 2, 520 + 3 * g / 2]; let y = [205 - 3 * g / 2, 285 - g / 2, 365 + g / 2, 445 + 3 * g / 2]; let block_num = [[16, 8, 8, 0], [2, 8, 32, 4], [8, 2, 8, 0], [32, 128, 16, 0]]; let default_block = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]; function count_white() {
-     let points [] = []; for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) if (block_num[i][j] == 0) points = append(points, (str(i) + "," + str(j))); //printArray(points);
+     let points [] = []; for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) if (block_num[i][j] == 0) points = append(points, (str(i) + "," + str(j)));
      return points;
 }
 function random_block() {
      let white = count_white(); if (white.length > 0) {
           //full
-          let point = split(white[int(random(white.length))], ","); //printArray(point);
+          let point = split(white[int(random(white.length))], ",");
           let block_number = (int(random(1, 40)) % 2 + 1) * 2; block_num[int(point[0])][int(point[1])] = block_number; appear[0] = int(point[0]); appear[1] = int(point[1]); //print(point[0]);
           console.log(',', point[0], point[1]); console.log(',', appear[0], appear[1]); console.log("appear:" + appear[0] + ',' + appear[1]);
      }
@@ -49,7 +49,7 @@ let count = 0; function show_block() {
                if (block_num[i][j] != 0) {
                     let num = int(log(block_num[i][j]) / log(2)); if (appear[0] != - 1) {
                          if (int(appear[0]) == i && int(appear[1]) == j) {
-                              push = 1; push(); //print(i);
+                              push = 1; push();
                               if (animation_start == 0) {
                                    animation_start = millis();
                               }
