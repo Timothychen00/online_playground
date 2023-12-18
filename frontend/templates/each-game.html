@@ -23,14 +23,15 @@
                 <div class="square mt-3 text-center shadow">
                     <h2 class="heartBeat_text" style="display: none;">Player1</h2>
                     <div class="more_information" style="display: none;">
-                        <hr class="mx-3">
-                        <p class="ms-4 text-start" style="color:gray;">20ms</p>
+                        <!-- <hr class="mx-3"> -->
+                        <!-- <p class="ms-4 text-start" style="color:gray;">20ms</p>
                         <p class="ms-4 text-start" style="color:gray;">Username: tim20060112
                         </p>
                         <p class="ms-4 text-start" style="color:gray;">Opponent: timothychen
-                        </p>
-                        <hr class="mx-3">
-                        <button class="btn btn-danger">Leave Game</button>
+                        </p> -->
+                        <!-- <hr class="mx-3"> -->
+                        <button class="btn btn-danger" onclick="location.href='/'" style="cursor:pointer">Leave
+                            Game</button>
                     </div>
                 </div>
             </div>
@@ -57,20 +58,21 @@
             <div class="col-6 p-0 d-inline-flex justify-content-around  " id="container">
             </div>
         </div>
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-1 ms-2">
-            <button class="btn btn-primary " style="background-color: white;color: black;" onclick="location.href='/'">返回大廳</button>
+                <button class="btn btn-primary " style="background-color: white;color: black;"
+                    onclick="location.href='/'">返回大廳</button>
             </div>
-        </div>
+        </div> -->
     </div>
 
 
     <script>
         single_player = () => {
             document.getElementById('score').classList.add('visually-hidden');
-        
+
             document.getElementById('config-score').classList.add('visually-hidden');
-            document.getElementById('defaultCanvas0').classList+='shadow p-3 mb-5 bg-body rounded';
+            document.getElementById('defaultCanvas0').classList += 'shadow p-3 mb-5 bg-body rounded';
 
 
         }
@@ -78,7 +80,7 @@
     </script>
 
     <!-- Bootstrap JavaScript Libraries -->
-    
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="/static/js/games/game_{{id}}.js"></script>
     <script src="/static/js/text.js"></script>

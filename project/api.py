@@ -50,7 +50,6 @@ class SessionAPI(Resource):
     
     def post(self):
         args = self.parser.parse_args()
-        print("here",args)
         if len(args['email']) ==0 or len(args['password'])==0:
             return {'message':'輸入格不能為空'},401
         result=Session.login_session(args)
@@ -59,7 +58,7 @@ class SessionAPI(Resource):
             session['email']=result['email']
             session['logged_in']=True
             print(session)
-            return {'message':'success'},200
+            return {'message':'success','token':os.getenv('SESSION_TOKEN'),'email':result['email'],'username':result['username']},200
         return {'message':result},401
     
     def delete(self):
