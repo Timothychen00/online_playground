@@ -12,7 +12,8 @@ let a = 0;
 let boom = 0; //9 blocks's boom
 let background_img;
 function setup() {
-    createCanvas(540, 650);
+    var canvas=createCanvas(540, 650);
+    canvas.parent('container');
     for (i = 0; i < 9; i++) {
         for (j = 0; j < 9; j++) {
             if (a <= 9) {

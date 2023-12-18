@@ -10,13 +10,16 @@ let redo = true;
 let stopgame = false;
 function setup() {
     restart();
-    createCanvas(400, 400);
+    var canvas = createCanvas(600, 600);
+    canvas.parent('container');
     textAlign(CENTER);
+    background(255);
 }
 function draw() {
     if (stopgame) {
         //do nothing because of game over (stop playing)
     } else {
+        // background(255);
         //draw stationary stuff
         time += 1;
         fill(255, 0, 0);
