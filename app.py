@@ -122,4 +122,4 @@ def handle_disconnect():
      
 
 if __name__ == '__main__':
-    socketio.run(app,'0.0.0.0',port=5300)
+    socketio.run(app,'0.0.0.0',port=5300,allow_unsafe_werkzeug=True)

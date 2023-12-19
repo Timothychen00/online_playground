@@ -1,3 +1,2 @@
-pip install pipenv
-pipenv sync
-pipenv shell
+
+pipenv run python app.py & pipenv run python -m frontend.app 
