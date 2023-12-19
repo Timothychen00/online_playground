@@ -4,10 +4,14 @@ let snakesize = 5;
 let time = 0;
 let headx = new Array(2500);
 let heady = new Array(2500);
-let applex = (Math.round(Math.random(47)) + 1) * 8;
-let appley = (Math.round(Math.random(47)) + 1) * 8;
+let applex = (Math.round(getRandomInt(50)) + 1) * 8;
+let appley = (Math.round(getRandomInt(50)) + 1) * 8;
 let redo = true;
 let stopgame = false;
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}
 function setup() {
     restart();
     var canvas = createCanvas(600, 600);
@@ -98,11 +102,11 @@ function display() {
     if (headx[1] == applex && heady[1] == appley) {
         //grow and spawn the apple somewhere away from the snake
         //(currently some of the code below might not be working, but the game still works.)
-        snakesize += Math.round(Math.random(3) + 1);
+        snakesize += Math.round(getRandomInt(3) + 1);
         redo = true;
         while (redo) {
-            applex = (Math.round(Math.random(47)) + 1) * 8;
-            appley = (Math.round(Math.random(47)) + 1) * 8;
+            applex = (Math.round(getRandomInt(47)) + 1) * 8;
+            appley = (Math.round(getRandomInt(47)) + 1) * 8;
             for (let i = 1; i < snakesize; i++) {
                 if (applex == headx[i] && appley == heady[i]) {
                     redo = true;
@@ -157,8 +161,8 @@ function restart() {
         heady[i] = 0;
     }
     stopgame = false;
-    applex = (Math.round(Math.random(47)) + 1) * 8;
-    appley = (Math.round(Math.random(47)) + 1) * 8;
+    applex = (Math.round(getRandomInt(47)) + 1) * 8;
+    appley = (Math.round(getRandomInt(47)) + 1) * 8;
     snakesize = 5;
     time = 0;
     angle = 0;
@@ -169,3 +173,4 @@ function sinecolor(percent) {
         sin(radians((((time + 255 * percent) % 255) / 255) * 360)) * 255;
     return slime;
 }
+
