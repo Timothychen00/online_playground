@@ -156,11 +156,13 @@
                                 <h2 class="text-center" style="font-weight:600;">歡迎回來</h2>
                                 <div id="message" class="alert alert-danger mb-0" style="display: none;"></div>
                                 <div class="form-floating mb-3 mt-5">
-                                    <input type="email" class="form-control login" id="email" placeholder="name@example.com">
+                                    <input type="email" class="form-control login" id="email"
+                                        placeholder="name@example.com">
                                     <label for="floatingInput">請輸入電子郵件</label>
                                 </div>
                                 <div class="form-floating">
-                                    <input type="password" class="form-control login" id="password" placeholder="Password">
+                                    <input type="password" class="form-control login" id="password"
+                                        placeholder="Password">
                                     <label for="floatingPassword">請輸入密碼</label>
                                 </div>
                                 <div class="form-check text-start pt-2">
@@ -241,18 +243,21 @@
                 </div>
 
 
-                            {% endblock main_content %} 
+                {% endblock main_content %}
 
             </div>
         </div>
 
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
-    integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
-    crossorigin="anonymous"></script>
+        integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
+        crossorigin="anonymous"></script>
     {% block script %}
     <script>
-        fetch('http://127.0.0.1:5300/api/game?isSingle=False', { mode: 'cors', method: 'GET' })
+        var link = "http://127.0.0.1:5300/";
+        if (location.href.includes("ckcsc.net"))
+            link = "http://backend.ckcsc.net:5300/";
+        fetch(link + 'api/game?isSingle=False', { mode: 'cors', method: 'GET' })
             .then((res) => (res.json()))
             .then((res) => {
                 console.log(res)
@@ -286,7 +291,7 @@
     </script>
     {% endblock script %}
     <!-- Bootstrap JavaScript Libraries -->
-    
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
         integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
         </script>

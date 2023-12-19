@@ -27,7 +27,10 @@
 
 {%block script%}
 <script>
-    var socket = io('http://localhost:5300', { autoConnect: true });
+    var link = "http://127.0.0.1:5300/";
+if(location.href.includes("ckcsc.net"))
+    link = "http://backend.ckcsc.net:5300/";
+    var socket = io(link, { autoConnect: true });
     var msg_input = document.getElementById('msg-input');
     var connect=false;
     var username='';

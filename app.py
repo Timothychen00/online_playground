@@ -111,7 +111,10 @@ def handle_chat(data):
     print('sid:',request.sid,data)
     emit('chat',data,broadcast=True)
     return
-        
+
+@app.route('/')
+def index():
+    return 'hello'
 # @socketio.on('debug')
 # def handle_debug(data):
 #     if 'userlist' in data:

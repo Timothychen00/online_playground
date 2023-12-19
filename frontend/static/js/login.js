@@ -1,6 +1,8 @@
 
 $(document).ready(function () {
-    var link = "http://127.0.0.1:5300/"
+    var link = "http://127.0.0.1:5300/";
+    if (location.href.includes("ckcsc.net"))
+        link = "http://backend.ckcsc.net:5300/";
 
     //用Enter鍵觸發按鈕
     const input = document.querySelectorAll('.login');
@@ -24,7 +26,7 @@ $(document).ready(function () {
                     if (data.message == "success") {
                         var verify_data = JSON.stringify({ token: data.token, username: data.username, email: data.email });
                         console.log(verify_data);
-                        fetch('http://127.0.0.1:8000/' + 'verify_session', { method: 'POST', mode: 'cors', body: verify_data, headers: { 'Content-Type': 'application/json' } })
+                        fetch(link.slice(0,-6) +':8000/verify_session', { method: 'POST', mode: 'cors', body: verify_data, headers: { 'Content-Type': 'application/json' } })
                             .then(response => {
                                 response.json().then(data => {
                                     console.log(data.message);

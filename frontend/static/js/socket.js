@@ -1,7 +1,10 @@
 
 // countdown_animation()
+var link = "http://127.0.0.1:5300/";
+if(location.href.includes("ckcsc.net"))
+    link = "http://backend.ckcsc.net:5300/";
 
-var socket = io('http://localhost:5300',{ autoConnect: false });
+var socket = io(link,{ autoConnect: false });
 
 socket.on('connect', function () {
   let username = document.getElementById('username').value;
