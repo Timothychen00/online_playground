@@ -1,10 +1,10 @@
 
 $(document).ready(function () {
     var link2 = "http://127.0.0.1:5300/";
-    var link="http://127.0.0.1:8000";
+    var link="http://127.0.0.1:8000/";
     if (location.href.includes("ckcsc.net")){
         link2= "https://backend.ckcsc.net/";
-        link='https://playground.ckcsc.net';
+        link='https://playground.ckcsc.net/';
     }
     //用Enter鍵觸發按鈕
     const input = document.querySelectorAll('.login');

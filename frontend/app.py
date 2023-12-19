@@ -54,10 +54,14 @@ def games(id):
 
 @app.route("/verify_session",methods=['POST'])
 def verify_session():
+    global session
     session_token = os.getenv('SESSION_TOKEN')
-    session['logged_in']=True
-    session['username']=request.get_json()['username']  
-    session['email']=request.get_json()['email']  
+    temp=session
+    temp['logged_in']=True
+    temp['username']=request.get_json()['username']  
+    temp['email']=request.get_json()['email']  
+    session=temp
+    session.modified = True
     print('VERIFYED- ',session)  
     return 'success'
 
