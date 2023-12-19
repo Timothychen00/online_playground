@@ -1,7 +1,7 @@
 var game_image_url='';
-var link = "http://127.0.0.1:5300/";
+var link2 = "http://127.0.0.1:5300/";
 if(location.href.includes("ckcsc.net"))
-    link = "https://backend.ckcsc.net/";
+    link2 = "https://backend.ckcsc.net/";
 
 function upload_game(){
     let key=['game_name','author','description','users_number','sync_mode','sync_variables','code_file'];
@@ -28,7 +28,7 @@ function upload_game(){
     msg=JSON.stringify(msg);
     console.log(msg);
     
-    fetch(link+'api/game',{body:msg,mode:'cors',method:'POST',headers:{'Content-Type':'application/json'}})
+    fetch(link2+'api/game',{body:msg,mode:'cors',method:'POST',headers:{'Content-Type':'application/json'}})
 }
 
 

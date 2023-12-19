@@ -1,10 +1,10 @@
 
 // countdown_animation()
-var link = "http://127.0.0.1:5300/";
+var link2 = "http://127.0.0.1:5300/";
 if(location.href.includes("ckcsc.net"))
-    link = "https://backend.ckcsc.net/";
+    link2 = "https://backend.ckcsc.net/";
 
-var socket = io(link,{ autoConnect: false });
+var socket = io(link2,{ autoConnect: false });
 
 socket.on('connect', function () {
   let username = document.getElementById('username').value;

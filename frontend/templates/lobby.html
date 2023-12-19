@@ -254,10 +254,10 @@
         crossorigin="anonymous"></script>
     {% block script %}
     <script>
-        var link = "http://127.0.0.1:5300/";
+        var link2 = "http://127.0.0.1:5300/";
         if (location.href.includes("ckcsc.net"))
-            link = "https://backend.ckcsc.net/";
-        fetch(link + 'api/game?isSingle=False', { mode: 'cors', method: 'GET' })
+            link2 = "https://backend.ckcsc.net/";
+        fetch(link2 + 'api/game?isSingle=False', { mode: 'cors', method: 'GET' })
             .then((res) => (res.json()))
             .then((res) => {
                 console.log(res)

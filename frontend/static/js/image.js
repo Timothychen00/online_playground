@@ -1,6 +1,6 @@
-var link = "http://127.0.0.1:5300/";
+var link2 = "http://127.0.0.1:5300/";
 if(location.href.includes("ckcsc.net"))
-    link = "https://backend.ckcsc.net/";
+    link2 = "https://backend.ckcsc.net/";
 $('.imgur').change(function () {
     var reader = new FileReader();
     reader.onload = function (e) {
@@ -25,7 +25,7 @@ $('.imgur').change(function () {
 });
 
 function fdone(data) {
-    fetch(link+"api/game", {
+    fetch(link2+"api/game", {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
