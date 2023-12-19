@@ -20,11 +20,11 @@
 
 </div>
 
-
 {% endblock main_content %}
 
 {%block script%}
 <script>
+
     var link2 = "http://127.0.0.1:5300/";
 if(location.href.includes("ckcsc.net"))
     link2 = "https://backend.ckcsc.net/";
@@ -59,6 +59,8 @@ if(location.href.includes("ckcsc.net"))
     });
     socket.on('chat', function (msg) {
         document.getElementById('chat-history').innerHTML += '<li>' + msg + '</li>';
+        var audio= new Audio('/static/mp3/videoplayback.mp3');
+        audio.play();   
     });
 </script>
 
