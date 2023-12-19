@@ -17,24 +17,6 @@
 
 <body>
     <div class="container-fluid" style="height: 100vh;">
-        <div class="toast-container position-absolute p-3 top-0 end-0" id="toastPlacement"
-            data-original-class="toast-container position-absolute p-3" style="z-index:99; display:none;">
-            <div class="toast fade show end-0" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header">
-                    <svg class="bd-placeholder-img rounded me-2" width="20" height="20"
-                        xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice"
-                        focusable="false">
-                        <rect width="100%" height="100%" fill="red"></rect>
-                    </svg>
-                    <strong class="me-auto">系統通知</strong>
-                    <small>當前</small>
-                    <button type="button" class="btn-close" id="close_button"></button>
-                </div>
-                <div class="toast-body" style="background-color: white; font-weight:700;">
-                    此功能尚未開放
-                </div>
-            </div>
-        </div>
         <div class="row text-center" style="height: 100vh;">
             <div class="col-2 color_dark_purple">
                 <img class="img-fluid mt-3" src="/static/img/playground.png" alt="">
@@ -49,14 +31,10 @@
                     <h5 class="mt-2 ms-3" style="font-weight: 800;">遊戲</h5>
                 </div>
                 <div class="side_card d-flex align-items-center justify-content-start ps-4 w-100 mt-1"
-                    id="friend_button">
+                    id="friend_button" onclick="location.href='/chat_room'">
                     <ion-icon name="people" style="font-size: 20px;"></ion-icon>
                     <h5 class="mt-2 ms-3" style="font-weight: 800;">社群</h5>
                 </div>
-                <!-- <<<<<<< UI -->
-                <!-- <div class="side_card d-flex align-items-center justify-content-start ps-4 w-100 mt-1 mb-1"
-                    data-bs-toggle="modal" data-bs-target="#Upload_Modal"> -->
-                <!-- ======= -->
                 <div class="side_card d-flex align-items-center justify-content-start ps-4 w-100 mt-1"
                     onclick="location.href='/create_game'">
                     <!-- >>>>>>> main -->
@@ -102,42 +80,7 @@
 
             </div>
         </div>
-
-        <!-- modal for upload a game -->
-        <div class=" modal fade" id="Upload_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5 fw-semibold" id="exampleModalLabel">上傳遊戲
-                        </h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="formFile" class="form-label fw-semibold">遊戲名稱</label>
-                            <input class="form-control" type="text" placeholder="" aria-label="default input example"
-                                id="game_name">
-                        </div>
-                        <div class="mb-3">
-                            <label for="formFile" class="form-label fw-semibold">遊戲圖片</label>
-                            <form id="imgur">
-                                <input class="form-control form-control-lg imgur fs-6 fw-semibold" id="formFileLg"
-                                    type="file" required accept="image/*" data-max-size="5000" />
-                            </form>
-                        </div>
-                        <div class="form-floating mt-4">
-                            <textarea class="form-control" placeholder="Leave a comment here" id="game_description"
-                                style="height: 100px"></textarea>
-                            <label for="floatingTextarea2" class="fw-semibold">遊戲介紹</label>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                        <button type="button" class="btn btn-primary" id="upload_game_button">上傳遊戲</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {% endblock main_content %}
 
 
         <!-- Modal For Login -->
@@ -160,11 +103,13 @@
                                 <h2 class="text-center" style="font-weight:600;">歡迎回來</h2>
                                 <div id="message" class="alert alert-danger mb-0" style="display: none;"></div>
                                 <div class="form-floating mb-3 mt-5">
-                                    <input type="email" class="form-control" id="email" placeholder="name@example.com">
+                                    <input type="email" class="form-control login" id="email"
+                                        placeholder="name@example.com">
                                     <label for="floatingInput">請輸入電子郵件</label>
                                 </div>
                                 <div class="form-floating">
-                                    <input type="password" class="form-control" id="password" placeholder="Password">
+                                    <input type="password" class="form-control login" id="password"
+                                        placeholder="Password">
                                     <label for="floatingPassword">請輸入密碼</label>
                                 </div>
                                 <div class="form-check text-start pt-2">
@@ -185,14 +130,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- 
-                    <div class="modal-body">
-                        ...
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Understood</button>
-                    </div> -->
+
                 </div>
             </div>
         </div>
@@ -249,33 +187,24 @@
                             </div>
                         </div>
                     </div>
-                    <!-- 
-                            <div class="modal-body">
-                                ...
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Understood</button>
-                            </div> -->
                 </div>
-                <!-- ======= -->
-                <!--             </div>  -->
 
 
-                <!--             {% endblock main_content %} -->
+                
 
-
-
-
-                <!-- >>>>>>> main -->
             </div>
         </div>
 
     </div>
-
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
+        integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
+        crossorigin="anonymous"></script>
+    {% block script %}
     <script>
-        fetch('http://127.0.0.1:5300/api/game?isSingle=False', { mode: 'cors', method: 'GET' })
+        var link2 = "http://127.0.0.1:5300/";
+        if (location.href.includes("ckcsc.net"))
+            link2 = "https://backend.ckcsc.net/";
+        fetch(link2 + 'api/game?isSingle=False', { mode: 'cors', method: 'GET' })
             .then((res) => (res.json()))
             .then((res) => {
                 console.log(res)
@@ -308,7 +237,9 @@
                 document.getElementById('games').innerHTML += game_inner;
             })
     </script>
+    {% endblock script %}
     <!-- Bootstrap JavaScript Libraries -->
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
         integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
         </script>

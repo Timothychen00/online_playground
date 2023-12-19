@@ -56,11 +56,7 @@
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
             <label class="form-check-label h6" for="exampleCheck1">同意條款</label>
         </div> -->
-        <div class="mb-3">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                上傳遊戲
-            </button>
-        </div>
+
         <div class="mb-3 form-check">
             <button type="submit" class="btn btn-primary" onclick="upload_game()" style="width: 100%;">Submit</button>
         </div>
@@ -70,42 +66,20 @@
 
 
 
-    <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">上傳遊戲</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" style="height: 30vh;">
-                    <div class="container-dragger">
-                        <input type="file" id="upload-button" multiple accept="image/*" />
-                        <label for="upload-button" class="drag-label"><i class="fa-solid fa-upload"></i>&nbsp;
-                            Choose Or Drop Files
-                        </label>
-                        <div id="error"></div>
-                        <div id="image-display"></div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">送出</button>
-                </div>
-            </div>
-        </div>
-    </div> -->
 
-
-    <script>
-        var users_number = document.getElementById('users_number');
-        users_number.addEventListener('change', () => {
-            if (users_number.value == '1') {
-                document.getElementById('multiplayer-optioin').style.display = 'none';
-            } else {
-                document.getElementById('multiplayer-optioin').style.display = 'block';
-
-            }
-        })
-    </script>
     <script src="/static/js/upload_game.js"></script>
     {% endblock main_content %}
+
+{%block script%}
+<script>
+    var users_number = document.getElementById('users_number');
+    users_number.addEventListener('change', () => {
+        if (users_number.value == '1') {
+            document.getElementById('multiplayer-optioin').style.display = 'none';
+        } else {
+            document.getElementById('multiplayer-optioin').style.display = 'block';
+
+        }
+    })
+</script>
+{%endblock script%}

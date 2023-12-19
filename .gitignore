@@ -6,3 +6,5 @@
 project/__pycache__/__init__.cpython-39.pyc
 *.pyc
 .env
+backend.tar
+frontend.tar

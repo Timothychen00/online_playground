@@ -1,6 +1,8 @@
 
 $(document).ready(function () {
-    var link = "http://127.0.0.1:5300/"
+    var link2 = "http://127.0.0.1:5300/";
+    if(location.href.includes("ckcsc.net"))
+        link2 = "https://backend.ckcsc.net/";
 
     //用Enter鍵觸發按鈕
     const input = document.querySelectorAll('input');
@@ -23,7 +25,7 @@ $(document).ready(function () {
             $("#register_message").text("密碼不一致").show();
         }
         else {
-            fetch(link + 'api/user', { method: 'POST', body: 'username=' + username + '&email=' + email + '&password=' + password, headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
+            fetch(link2 + 'api/user', { method: 'POST', body: 'username=' + username + '&email=' + email + '&password=' + password, headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
                 .then(response => {
                     response.json().then(data => {
                         console.log(data.message);

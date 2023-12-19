@@ -54,10 +54,14 @@ def games(id):
 
 @app.route("/verify_session",methods=['POST'])
 def verify_session():
+    global session
     session_token = os.getenv('SESSION_TOKEN')
-    session['logged_in']=True
-    session['username']=request.get_json()['username']  
-    session['email']=request.get_json()['email']  
+    temp=session
+    temp['logged_in']=True
+    temp['username']=request.get_json()['username']  
+    temp['email']=request.get_json()['email']  
+    session=temp
+    session.modified = True
     print('VERIFYED- ',session)  
     return 'success'
 
@@ -67,6 +71,10 @@ def get_session():
     if 'logged_in' in session and session['logged_in']:
         return {'message':session['username']},200
     return {'message':'not logged in'},200
+
+@app.route("/chat_room")
+def chat_room():
+    return render_template("chat_room.html")
 
 @app.route("/logout")
 def logout():

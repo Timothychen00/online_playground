@@ -105,6 +105,16 @@ def handle_disconnect():
             
             return
         
+
+@socketio.on('chat')
+def handle_chat(data):
+    print('sid:',request.sid,data)
+    emit('chat',data,broadcast=True)
+    return
+
+@app.route('/')
+def index():
+    return 'hello'
 # @socketio.on('debug')
 # def handle_debug(data):
 #     if 'userlist' in data:
@@ -122,4 +132,4 @@ def handle_disconnect():
      
 
 if __name__ == '__main__':
-    socketio.run(app,'0.0.0.0',port=5300,allow_unsafe_werkzeug=True)
+    socketio.run(app,'0.0.0.0',port=5300)
