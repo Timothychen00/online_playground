@@ -1,6 +1,6 @@
 var link = "http://127.0.0.1:8000/get_session";
 if(location.href.includes("ckcsc.net"))
-    link = "http://playground.ckcsc.net:8000/get_session";
+    link = "https://playground.ckcsc.net/get_session";
 $(document).ready(function () {
     console.log("doing session check");
     fetch(link, { method: "GET" })

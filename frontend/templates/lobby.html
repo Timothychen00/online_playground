@@ -256,7 +256,7 @@
     <script>
         var link = "http://127.0.0.1:5300/";
         if (location.href.includes("ckcsc.net"))
-            link = "http://backend.ckcsc.net:5300/";
+            link = "http://backend.ckcsc.net/";
         fetch(link + 'api/game?isSingle=False', { mode: 'cors', method: 'GET' })
             .then((res) => (res.json()))
             .then((res) => {

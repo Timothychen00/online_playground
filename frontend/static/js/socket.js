@@ -2,7 +2,7 @@
 // countdown_animation()
 var link = "http://127.0.0.1:5300/";
 if(location.href.includes("ckcsc.net"))
-    link = "http://backend.ckcsc.net:5300/";
+    link = "https://backend.ckcsc.net/";
 
 var socket = io(link,{ autoConnect: false });
 

@@ -1,7 +1,7 @@
 var game_image_url='';
 var link = "http://127.0.0.1:5300/";
 if(location.href.includes("ckcsc.net"))
-    link = "http://backend.ckcsc.net:5300/";
+    link = "https://backend.ckcsc.net/";
 
 function upload_game(){
     let key=['game_name','author','description','users_number','sync_mode','sync_variables','code_file'];
