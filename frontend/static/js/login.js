@@ -3,7 +3,7 @@ $(document).ready(function () {
     var link = "http://127.0.0.1:5300/"
 
     //用Enter鍵觸發按鈕
-    const input = document.querySelectorAll('input');
+    const input = document.querySelectorAll('.login');
     input.forEach((item) => {
         item.addEventListener("keyup", (e) => {
             if (e.key === 'Enter') {

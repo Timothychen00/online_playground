@@ -1,0 +1,64 @@
+{% extends 'lobby.html' %}
+{% block main_content %}
+
+<div class="col-10 color_light_purple d-inline-flex justify-content-center pt-5 text-center pb-5">
+
+    <h1 style="color: white;position:absolute">聊天室</h1>
+    <br>
+    <div class="mt-5 col-6 py-5 card d-inline-flex justify-content-center text-start mb-5 shadow shadow-lg ">
+
+        <div style="height:100%;overflow-y:scroll" >
+            <ul class="px-5" id="chat-history" style="height:100%">
+                <li>123</li>
+                <li>234</li>
+            </ul>
+        </div>
+        <input type="text" class="align-bottom form-control"
+            style="position: absolute; bottom: 0;border-top: 2px solid black;border;height: 40px;" id="msg-input">
+    </div>
+</div>
+
+</div>
+
+</div>
+
+
+{% endblock main_content %}
+
+{%block script%}
+<script>
+    var socket = io('http://localhost:5300', { autoConnect: true });
+    var msg_input = document.getElementById('msg-input');
+    var connect=false;
+    var username='';
+    fetch('/get_session')
+    .then((res)=>{
+        return res.json();
+    })  
+    .then((res)=>{
+        username=res['message'];
+    });
+    msg_input.addEventListener('keydown', () => {
+        if (event.keyCode == 13) {
+            if(!connect){
+                alert("等待於伺服器連線");
+                return;
+            }
+            console.log('12323');
+            console.log(username);
+            if (username!='not logged in')
+                socket.emit('chat', username+":"+msg_input.value);
+            else
+                alert("請先登入");
+        }
+    })
+    socket.on('connect', function () {
+        console.log('connect123232323');
+        connect=true;
+    });
+    socket.on('chat', function (msg) {
+        document.getElementById('chat-history').innerHTML += '<li>' + msg + '</li>';
+    });
+</script>
+
+{%endblock script%}

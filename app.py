@@ -105,6 +105,13 @@ def handle_disconnect():
             
             return
         
+
+@socketio.on('chat')
+def handle_chat(data):
+    print('sid:',request.sid,data)
+    emit('chat',data,broadcast=True)
+    return
+        
 # @socketio.on('debug')
 # def handle_debug(data):
 #     if 'userlist' in data:

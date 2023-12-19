@@ -28,20 +28,6 @@ function upload_game(){
     fetch('http://127.0.0.1:5300/api/game',{body:msg,mode:'cors',method:'POST',headers:{'Content-Type':'application/json'}})
 }
 
-// const form = document.getElementById('upload');
-// const fileInput = form.querySelector('#file');
-
-// form.addEventListener('submit', evt => {
-//     evt.preventDefault();
-//     const params = {
-//         url: '/api/upload',
-//         fileName: 'file',
-//         fileData: fileInput.files[0]
-//     };
-//     uploadFile(params).then(results => {
-//         //...
-//     });
-// }, false);
 
 
 

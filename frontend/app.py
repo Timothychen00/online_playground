@@ -68,6 +68,10 @@ def get_session():
         return {'message':session['username']},200
     return {'message':'not logged in'},200
 
+@app.route("/chat_room")
+def chat_room():
+    return render_template("chat_room.html")
+
 @app.route("/logout")
 def logout():
     session.clear();
