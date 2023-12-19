@@ -7,6 +7,9 @@ let snakex = new Array(3000);
 let snakey = new Array(3000);
 let snakeComx = new Array(3000);
 let snakeComy = new Array(3000);
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
 let foodx = (Math.round(getRandomInt(47)) + 1) * 16;
 let foody = (Math.round(getRandomInt(47)) + 1) * 16;
 let mode = 0;
@@ -20,9 +23,6 @@ function setup() {
     canvas.parent('container');
     textAlign(CENTER);
 }
-function getRandomInt(max) {
-    return Math.floor(Math.random() * max);
-  }
 function draw() {
     if (mode == 0) {
         fill(255);
@@ -48,7 +48,7 @@ function draw() {
                 background(255);
                 mode = 3;
             }
-            if (key == "b") {
+            if (key == "b" || key == "B") {
                 background(0);
                 mode = 5;
             }
@@ -85,6 +85,12 @@ function draw() {
         textSize(36);
         text("CHOOSE DIFFICULTY", width / 2, height / 2 - 80);
         textSize(20);
+        text(
+            "EAT COM'S TAIL OR GET 15 POINTS TO WIN",
+            width / 2,
+            height / 2 - 130
+        );
+        textSize(20);
         text("PRESS 1 TO PLAY EASY MODE", width / 2, height / 2 - 30);
         text("PRESS 2 TO PLAY HARD MODE", width / 2, height / 2 + 10);
         text("PRESS S TO SWITCH TO SINGLE MODE", width / 2, height / 2 + 50);
@@ -97,7 +103,7 @@ function draw() {
                 background(255);
                 mode = 7;
             }
-            if (key == "s") {
+            if (key == "s" || key == "S") {
                 background(255);
                 mode = 0;
             }
@@ -121,7 +127,7 @@ function draw() {
                 walk();
                 checkWin();
             }
-            if (time % 10 == 0) {
+            if (time % 9 == 0) {
                 displayCom();
                 walkCom();
                 autoTurn();
@@ -232,7 +238,20 @@ function checkAlive() {
     }
 }
 function checkWin() {
-    for (let i = 1; i <= snakeSizeCom; i++) {
+    if (snakeSize >= 20) {
+        fill(255);
+        rect(200, 200, 400, 300);
+        fill(0);
+        textSize(28);
+        text("YOU ACHIEVED THE GOAL!", width / 2, height / 2 - 110);
+        textSize(36);
+        text("VICTORY!!!", width / 2, height / 2 - 70);
+        textSize(20);
+        text("YOU WON", width / 2, height / 2 - 20);
+        text("PRESS ALT TO GO BACK TO MENU", width / 2, height / 2 + 30);
+        mode = 8;
+    }
+    for (let i = 1; i < snakeSizeCom - 3; i++) {
         if (snakex[1] == snakeComx[i] && snakey[1] == snakeComy[i]) {
             fill(255);
             rect(200, 200, 400, 300);
@@ -280,6 +299,21 @@ function checkWin() {
             mode = 8;
         }
         if (snakeComx[1] == snakex[i] && snakeComy[1] == snakey[i]) {
+            fill(255);
+            rect(200, 200, 400, 300);
+            fill(0);
+            textSize(28);
+            text("YOU ARE EATEN!", width / 2, height / 2 - 110);
+            textSize(36);
+            text("GAME OVER", width / 2, height / 2 - 70);
+            textSize(20);
+            text("YOU LOST", width / 2, height / 2 - 20);
+            text("PRESS ALT TO GO BACK TO MENU", width / 2, height / 2 + 30);
+            mode = 8;
+        }
+    }
+    for (let i = snakeSizeCom - 3; i < snakeSizeCom; i++) {
+        if (snakex[1] == snakeComx[i] && snakey[1] == snakeComy[i]) {
             fill(255);
             rect(200, 200, 400, 300);
             fill(0);
@@ -366,6 +400,10 @@ function displayCom() {
     stroke(0);
     fill(29, 46, 114);
     rect(snakeComx[1], snakeComy[1], 16, 16);
+    fill(255, 165, 100);
+    for (let i = snakeSizeCom - 3; i < snakeSizeCom; i++) {
+        rect(snakeComx[i], snakeComy[i], 16, 16);
+    }
     fill(255);
     rect(snakeComx[snakeSizeCom], snakeComy[snakeSizeCom], 16, 16);
 }
@@ -388,8 +426,8 @@ function restartCom() {
         snakeComx[i] = 0;
         snakeComy[i] = 0;
     }
-    snakeComx[1] = 80;
-    snakeComy[1] = 80;
+    snakeComx[1] = Math.round(getRandomInt(5, 45)) * 16;
+    snakeComy[1] = Math.round(getRandomInt(5, 15)) * 16;
     snakeSizeCom = 15;
     angleCom = 0;
 }
