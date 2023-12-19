@@ -48,7 +48,7 @@ if(location.href.includes("ckcsc.net"))
             console.log('12323');
             console.log(username);
             if (username!='not logged in')
-                socket.emit('chat', username+":"+msg_input.value);
+                socket.emit('chat', "["+username+"] "+msg_input.value);
             else
                 alert("請先登入");
         }
