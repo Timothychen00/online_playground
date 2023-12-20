@@ -3,7 +3,8 @@
 //8 E9B582
 //y->i
 //x->j
-let colors = ["#FFFFFF", "#ECE4DB", "#ECE1CC", "#E9B582", "#E99A6D", "#E78367", "#E56948", "#E8D180", "#E8CD72"]; let text_colors = ["#FFFFFF", "#756E66", "#756E66", "#F8F6F2", "#F8F6F2", "#F8F6F2", "#F8F6F2", "#F8F6F2", "#F8F6F2"]; let score = 0; let steps = 0; let isPush = 0; let lose = 0; let available_movements = 0; let proress = 0; //animation
+let colors = ["#FFFFFF", "#ECE4DB", "#ECE1CC", "#E9B582", "#E99A6D", "#E78367", "#E56948", "#E8D180", "#E8CD72",'#EDC53F','#edc22e','#3c3a33']
+; let text_colors = ["#FFFFFF", "#756E66", "#756E66", "#F8F6F2", "#F8F6F2", "#F8F6F2", "#F8F6F2", "#F8F6F2", "#F8F6F2",'#f8f6f2','#f8f6f2','#f8f6f2']; let score = 0; let steps = 0; let isPush = 0; let lose = 0; let available_movements = 0; let proress = 0; //animation
 let appear = [- 1, - 1]; let animation_start = 0; function show_score() { //rect();
     fill("#CAC1B5");
     rect(535 - 80 - 5, 70, 80, 80, 10);
@@ -31,7 +32,7 @@ let animation_queue = []; //set the colors
 let g = 15; let click = 0;
 let x = [280 - 3 * g / 2, 360 - g / 2, 440 + g / 2, 520 + 3 * g / 2];
 let y = [205 - 3 * g / 2, 285 - g / 2, 365 + g / 2, 445 + 3 * g / 2];
-let block_num = [[16, 8, 8, 0], [2, 8, 32, 4], [8, 2, 8, 0], [32, 128, 16, 0]];
+let block_num = [[512, 0, 0, 0], [2, 8, 32, 4], [8, 2, 8, 0], [32, 128, 16, 0]];
 let default_block = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]];
 function count_white() {
 
