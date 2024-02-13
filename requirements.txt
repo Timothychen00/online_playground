@@ -20,7 +20,7 @@ platformdirs==4.1.0
 pymongo==4.6.0
 python-dotenv==1.0.0
 python-engineio==4.8.0
-python-socketio==5.10.0
+python-socketio==4.3.2
 pytz==2023.3.post1
 simple-websocket==1.0.0
 six==1.16.0
