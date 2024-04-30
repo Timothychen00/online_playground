@@ -8,3 +8,4 @@ project/__pycache__/__init__.cpython-39.pyc
 .env
 backend.tar
 frontend.tar
+.env
