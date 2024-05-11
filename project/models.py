@@ -10,7 +10,7 @@ load_dotenv()
 # avoid abort
 class DB_model():
     def __init__(self):
-        self.client=MongoClient(f'mongodb+srv://{os.environ["DB_USER"]}:{os.environ["DB_PASS"]}@cluster0.n5ouq33.mongodb.net/?retryWrites=true&w=majority')
+        self.client=MongoClient(os.environ['DB_STRING'])
         self.db=self.client.db
         self.cachable=True
         self.cache=list(self.db['rooms'].find({}))
