@@ -53,7 +53,7 @@ def check_document(collection='users',key_value={},isSingle:bool=True):# 返回�
 
 class User:
     def create_user(data:dict):
-        if 'err' not in check_document('users',{'email':data['email']},isSingle=True):
+        if 'err' not in check_document('users',{'email':data['email']}):
             return 'email is already used'
         db_model.db['users'].insert_one(data)
         return 'success'
@@ -78,9 +78,9 @@ class Session():
         pass
     
     def login_session(data:dict):
-        if 'err'  in check_document('users',{'email':data['email']},isSingle=True):
+        if 'err'  in check_document('users',{'email':data['email']}):
             return 'none_email_is_found'
-        if 'err' not in check_document('users',{'email':data['email'],'password':data['password']},isSingle=True):
+        if 'err' not in check_document('users',{'email':data['email'],'password':data['password']}):
             return db_model.db['users'].find_one({'email':data['email']})
         return 'wrong_password'
     
@@ -89,7 +89,7 @@ class Session():
 
 
 class Room():#a room is settled for handling a game
-    def create_room(args:dict):
+    def create_room(self,args:dict):
         data={
             '_id':"R"+str(time.time())[-5:],#6碼
             "users":[
@@ -105,7 +105,7 @@ class Room():#a room is settled for handling a game
     # def update_cache():
     #     db_model.cache=
     # @timing
-    def get_room(filter,isSingle=True):
+    def get_room(self,filter,isSingle=True):
             result=check_document('rooms',filter,isSingle)
             print('result',result)
             if 'err' not in result:
@@ -133,8 +133,8 @@ class Room():#a room is settled for handling a game
                         result=result[0]#extract
             return result
 
-    def edit_room(filter,data):
-        result=Room.get_room(filter,isSingle=True)
+    def edit_room(self,filter,data):
+        result=Room.get_room(filter)
         print(data)
         if 'err' not in result:
             db_model.db['rooms'].update_one(filter,{"$set":data})
@@ -142,7 +142,7 @@ class Room():#a room is settled for handling a game
             return f"{result['_id']} edited!"
         return result#err return
 
-    def delete_room(filter,isSingle=True):
+    def delete_room(self,filter,isSingle=True):
         result=check_document('rooms',filter,isSingle)
         if 'err' not in result:
             delete_id=result['_id']
@@ -157,7 +157,7 @@ class Room():#a room is settled for handling a game
             return f"{delete_id} deleted!"
         return result
     
-    def pairing_room(sid):# 匹配 隨機加入可以加入的房間
+    def pairing_room(self,sid):# 匹配 隨機加入可以加入的房間
         result=Room.get_room({'status':'waiting'},isSingle=False)
         if 'err' not in result:
             random_room=random.randint(0,len(result)-1)
@@ -165,10 +165,10 @@ class Room():#a room is settled for handling a game
             return join_result
         return result
     
-    def leave_room(roomid,sid):
-        result=Room.get_room({'_id':roomid},isSingle=True)
+    def leave_room(self,roomid,sid):
+        result=Room.get_room({'_id':roomid})
         if 'err' not in result:
-            game_result=Game.get_game('games',{'name':result['game']},isSingle=True)# querying to check for game settings 
+            game_result=Game.get_game('games',{'name':result['game']})# querying to check for game settings 
             if 'err' not in game_result:
                 #check if user is in room
                 if sid in result['users']:
@@ -183,10 +183,10 @@ class Room():#a room is settled for handling a game
             return game_result
         return result
     
-    def join_room(roomid,sid):
-        result=Room.get_room({'_id':roomid},isSingle=True)
+    def join_room(self,roomid,sid):
+        result=Room.get_room({'_id':roomid})
         if 'err' not in result:
-            game_result=Game.get_game('games',{'name':result['game']},isSingle=True)# querying to check for game settings 
+            game_result=Game.get_game('games',{'name':result['game']})# querying to check for game settings 
             if 'err' not in game_result:
                 if game_result['users_number']>len(result['users']):
                     result['users'].append(sid)
@@ -202,7 +202,7 @@ class Room():#a room is settled for handling a game
     
 
 class Game():#a room is settled for handling a game
-    def create_game(args:dict):#name repetenot yet
+    def create_game(self,args:dict):#name repetenot yet
         data={
             '_id':"G"+str(time.time())[-5:],#6碼
             "name":args['game_name'],
@@ -222,7 +222,7 @@ class Game():#a room is settled for handling a game
         result=db_model.db['games'].insert_one(data)
         return f"{result.inserted_id} created!"
     
-    def get_game(filter,isSingle=True):
+    def get_game(self,filter,isSingle=True):
         result=check_document('games',filter,isSingle)
         if 'err' not in result:
             result=list(db_model.db['games'].find(filter))
@@ -230,7 +230,7 @@ class Game():#a room is settled for handling a game
                 result=result[0]#extract
         return result
     
-    def edit_game(filter,data):# 匹配
+    def edit_game(self,filter,data):# 匹配
         result=Game.get_game(filter,isSingle=True)
         print(data)
         if 'err' not in result:
@@ -241,7 +241,7 @@ class Game():#a room is settled for handling a game
         
         
     
-    def delete_game(filter,isSingle=True):
+    def delete_game(self,filter,isSingle=True):
         result=check_document('games',filter,isSingle)
         if 'err' not in result:
             delete_id=result['_id']
