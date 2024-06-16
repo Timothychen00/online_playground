@@ -1,9 +1,12 @@
-from flask_restful import Resource,reqparse
+import os
 
-from flask import session,request
+from flask_restful import Resource
+from flask_restful import reqparse
+from flask import session
 from flask import request
 import werkzeug
-from project.models import *
+
+from project.models import db_model,User,Game,Room,Session
 
 
 class UserAPI(Resource):

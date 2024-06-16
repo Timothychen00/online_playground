@@ -1,8 +1,14 @@
-from flask import Flask,render_template,session,request,redirect
 import os
+from datetime import timedelta
+
+from flask import Flask
+from flask import render_template
+from flask import session
+from flask import request
+from flask import redirect
 from flask_cors import CORS
 from dotenv import load_dotenv
-from datetime import timedelta
+
 env_path = os.path.join(os.path.dirname(__file__), '..', '.env')
 
 # 載入.env檔案中的環境變數

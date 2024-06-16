@@ -1,8 +1,13 @@
+import os
+import time
+import json
+import random
+
 from pymongo.mongo_client import MongoClient
 from dotenv import load_dotenv
-import os,time,json
+
 from project.decorators import timing
-import random
+
 load_dotenv()
     
 # get_method=> err and data
