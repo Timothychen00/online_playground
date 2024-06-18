@@ -1,13 +1,30 @@
-from flask import Flask, render_template,request,jsonify,session
-from flask_socketio import SocketIO,send,emit,join_room, leave_room,disconnect
-from flask.sessions import SecureCookieSessionInterface
-import random,json,os
-from flask_restful import Api,Resource
-from flask_cors import CORS
-from project.models import *
-from project.api import UserAPI,SessionAPI,GameAPI,RoomAPI
-from dotenv import load_dotenv
+import random
+import os
+import json
 from datetime import timedelta
+
+from flask import Flask
+from flask import render_template
+from flask import request
+from flask import jsonify
+from flask import session
+from flask_socketio import SocketIO
+from flask_socketio import send
+from flask_socketio import emit
+from flask_socketio import leave_room
+from flask_socketio import join_room
+from flask_socketio import disconnect
+from flask.sessions import SecureCookieSession
+from flask_restful import Api
+from flask_restful import Resource
+from flask_cors import CORS
+from dotenv import load_dotenv
+
+# from project.models import 
+from project.api import UserAPI
+from project.api import SessionAPI
+from project.api import GameAPI
+from project.api import RoomAPI
 from project.models import db_model
 load_dotenv()
 

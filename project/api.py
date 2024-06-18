@@ -6,8 +6,11 @@ from flask import session
 from flask import request
 import werkzeug
 
-from project.models import db_model,User,Game,Room,Session
-
+from project.models import db_model
+from project.models import User
+from project.models import Game
+from project.models import Room
+from project.models import Session
 
 class UserAPI(Resource):
     #io
