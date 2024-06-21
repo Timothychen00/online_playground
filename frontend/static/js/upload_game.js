@@ -5,10 +5,10 @@ if(location.href.includes("ckcsc.net"))
 
 function upload_game(){
     let key=['game_name','author','description','users_number','sync_mode','sync_variables','code_file'];
-    msg={};
+    let msg={};
     
     console.log(key.length)
-    for(i=0;i<key.length;i++){
+    for(let i=0;i<key.length;i++){
        
 
         msg[key[i]]=document.getElementById(key[i]).value;

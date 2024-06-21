@@ -26,13 +26,13 @@ class DB_model():
         except:
             print('資料庫連線失敗')
     
-    def back_up():
+    def back_up(self):
         pass
     
-    def download():
+    def download(self):
         pass
     
-    def upload():
+    def upload(self):
         pass
 
     def renew_cache(self):
@@ -57,39 +57,39 @@ def check_document(collection='users',key_value={},isSingle:bool=True):# 返回�
     return {'err':'key and value are required for checking documents'}
 
 class User:
-    def create_user(data:dict):
+    def create_user(self,data:dict):
         if 'err' not in check_document('users',{'email':data['email']}):
             return 'email is already used'
         db_model.db['users'].insert_one(data)
         return 'success'
 
-    def get_user(filter:dict,isSingle=True):
+    def get_user(self,filter:dict,isSingle=True):
         # db_model.db['users'].delete_many({})
         # print(list(db_model.db['users'].find({})))
         pass
     
-    def edit_user(filter:dict,data:dict):
+    def edit_user(self,filter:dict,data:dict):
         pass
     
-    def delete_user(filter:dict,isSingle=True):
+    def delete_user(self,filter:dict,isSingle=True):
         pass
     
-    def connect_user():
+    def connect_user(self):
         pass
 
 
 class Session():
-    def get_session():
+    def get_session(self):
         pass
     
-    def login_session(data:dict):
+    def login_session(self,data:dict):
         if 'err'  in check_document('users',{'email':data['email']}):
             return 'none_email_is_found'
         if 'err' not in check_document('users',{'email':data['email'],'password':data['password']}):
             return db_model.db['users'].find_one({'email':data['email']})
         return 'wrong_password'
     
-    def clear_session():
+    def clear_session(self):
         pass
 
 

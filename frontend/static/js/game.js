@@ -1,7 +1,8 @@
 var x, y, speedx = 0, speedy = 0;
 var player1_y = 0;
-var player2_score = 0, player1_score = 0, flg;
+var player2_score = 0, player1_score = 0;
 var player2_y = 0;
+var flg;
 
 
 function choice() {
