@@ -30,8 +30,6 @@ load_dotenv()
 
 app = Flask(__name__)
 
-# session_cookie = SecureCookieSessionInterface().get_signing_serializer(app)
-
 app.config['SECRET_KEY'] = 'os.urandom(16).hex()'
 app.config['DEBUG']=True
 socketio = SocketIO(app, cors_allowed_origins="*")
@@ -119,34 +117,15 @@ def handle_disconnect():
                 emit('sync',{"status":'waiting'},to=userlist[index-1]['sid'])
             del userlist[index]
             print('-'*20,'\n',userlist,'\n','-'*20)
-            
-            return
         
-
 @socketio.on('chat')
 def handle_chat(data):
     print('sid:',request.sid,data)
     emit('chat',data,broadcast=True)
-    return
 
 @app.route('/')
 def index():
     return 'hello'
-# @socketio.on('debug')
-# def handle_debug(data):
-#     if 'userlist' in data:
-#         emit('debug',{'userlist':json.dumps(userlist)})
-    
-        
-# @app.route('/remove/<string:sid>')
-# def remove_user(sid):
-#     global userlist
-#     disconnect(sid)
-#     for index in range(len(userlist)):
-#         if sid ==userlist[index]['sid']:
-#             del userlist[index]
-#     return '1'
-     
 
 if __name__ == '__main__':
     socketio.run(app,'0.0.0.0',port=5300)
