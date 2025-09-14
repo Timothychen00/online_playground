@@ -1,6 +1,7 @@
 from flask import Flask,session,jsonify
+import os 
 app=Flask(__name__)
-app.secret_key='123123'
+app.secret_key=os.urandom(16).hex()
 
 @app.route('/')
 def home():

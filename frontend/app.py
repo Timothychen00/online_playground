@@ -11,7 +11,7 @@ load_dotenv(env_path)
 # 使用環境變數
 import os
 app=Flask(__name__)
-app.secret_key='os.urandom(16).hex()'
+app.secret_key=os.urandom(16).hex()
 CORS(app,resources={r"*": {"origins": "*"}})
 # CORS(app, supports_credentials=True)
 
