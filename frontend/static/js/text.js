@@ -12,7 +12,7 @@ function score_active() {
 
 function display_text() {
     var x = document.getElementsByClassName("heartBeat_text");
-    for (i = 0; i < x.length; i++) {
+    for (let i = 0; i < x.length; i++) {
         x[i].classList.add("animate__heartBeat");
         x[i].style.display = 'block';
     }
@@ -21,7 +21,7 @@ function display_text() {
 
 function display_score() {
     var x = document.getElementsByClassName("bounce_text");
-    for (i = 0; i < x.length; i++) {
+    for (let i = 0; i < x.length; i++) {
         x[i].classList.add("animate__animated");
         x[i].classList.add("animate__rubberBand");
         x[i].style.display = 'block';

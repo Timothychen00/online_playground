@@ -1,7 +1,8 @@
 var x, y, speedx = 0, speedy = 0;
 var player1_y = 0;
-var player2_score = 0, player1_score = 0, flg;
+var player2_score = 0, player1_score = 0;
 var player2_y = 0;
+var flg;
 
 
 function choice() {
@@ -53,7 +54,7 @@ function draw() {
       player1_score++;
       // add_score(1);
       window.msg = 'countdown';
-      countdown_animation(3, 'delay', callback = ball);
+      countdown_animation(3, 'delay1', callback = ball);
       flg = 1;
     }
   }
@@ -76,7 +77,7 @@ function draw() {
       player2_score++;
       // add_score(2);
       window.msg = 'countdown';
-      countdown_animation(3, 'delay', callback = ball);
+      countdown_animation(3, 'delay1', callback = ball);
       flg = 1;
     }
   }

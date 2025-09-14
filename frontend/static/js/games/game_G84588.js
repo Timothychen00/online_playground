@@ -38,7 +38,6 @@ function setup() {
         EasyMPPlus = 5,
         NormalMPPlus = 10,
         HardMPPlus = 20;
-    CD;
     STATUS = "Start";
     teki = []
     enemyAttackY = []
@@ -47,11 +46,6 @@ function setup() {
     TG = []
     X = []
     Vx = []
-    GameStart, Setting;
-    EasyCharacter, NormalCharacter, HardCharacter;
-    EasyAttack, NormalAttack, HardAttack;
-    haikeiEasy, haikeiNormal, haikeiHard, haikeiInsane;
-    enemyAttack_mahoujin, enemyAttack_mahoujin_kidou;
     NormalEnemy = []
     HardEnemy = [] //PImage InsaneBoss;
 

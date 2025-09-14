@@ -1,7 +1,10 @@
-from flask import flash, redirect,session
 from functools import wraps
 import datetime
 import time
+
+from flask import flash
+from flask import redirect
+from flask import session
 
 def login_required(a):
     @wraps(a)

@@ -132,20 +132,7 @@ function jump() {
         }
     }
     image(dino_img, 20, jump_y); //if (status=="jump"){
-    //  jump_y-=jump_speedY;
-    //  println("...........");
-    //  image(loadImage("dino.png"),20,jump_y);
-    //}
-    //if (jump_y< 240){
-    //  status="too_high";
-    //  jump_y+=jump_speedY;
-    //  image(loadImage("dino.png"),20,jump_y);
-    //}
-    //if (jump_y > 300){
-    //  status="normal";
-    //  jump_y=240;
-    //  dino();
-    //}
+
 }
 function score() {
     recent_time = millis(); //json = loadJSONObject("data.json");
@@ -157,10 +144,7 @@ function score() {
         "HI" + "   " + highest_score + "   " + recent_score,
         0.8 * width,
         0.1 * height
-    ); //if (recent_score > highest_score){
-    //  json.setInt("highest_score", recent_score);
-    //  saveJSONObject(json, "data/data.json");
-    //}
+    ); 
     if (recent_time - previous_time > 150) {
         recent_score += 1;
         previous_time = millis();
@@ -192,21 +176,20 @@ function speed() {
         if (speed_time - speed_previous_time > 1000) {
             cactus_speedX += 0.5;
             ground_speedX += 0.5; //println("add");
-            //println(cactus_speedX);
+
             speed_previous_time = millis();
         }
     }
 }
 function failed() {
     if (cheat_mode == "False") {
-        //println(cactus_x-5.5);
-        //println(jump_y);
+
         if (cactus_x - 5.5 < 50 && cactus_x - 5.5 > 0 && jump_y >= 180) {
-            //println("failed_1");
+
             game_status = "failed";
         }
         if (cactus_x_2 - 5.5 < 50 && cactus_x_2 - 5.5 > 0 && jump_y >= 180) {
-            //println("failed_2");
+
             game_status = "failed";
         }
     }

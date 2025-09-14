@@ -25,10 +25,12 @@
 {%block script%}
 <script>
 
-    var link2 = "http://127.0.0.1:5300/";
+    var link2 = "https://backend.ckcsc.net";
 if(location.href.includes("ckcsc.net"))
-    link2 = "https://backend.ckcsc.net/";
+    link2 = "https://backend.ckcsc.net";
+    
     var socket = io(link2, { autoConnect: true });
+    
     var msg_input = document.getElementById('msg-input');
     var connect=false;
     var username='';

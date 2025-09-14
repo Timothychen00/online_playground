@@ -1,20 +1,34 @@
-from flask import Flask, render_template,request,jsonify,session
-from flask_socketio import SocketIO,send,emit,join_room, leave_room,disconnect
-from flask.sessions import SecureCookieSessionInterface
-import random,json,os
-from flask_restful import Api,Resource
-from flask_cors import CORS
-from project.models import *
-from project.api import UserAPI,SessionAPI,GameAPI,RoomAPI
-from dotenv import load_dotenv
+import random
+import os
+import json
 from datetime import timedelta
+
+from flask import Flask
+from flask import render_template
+from flask import request
+from flask import jsonify
+from flask import session
+from flask_socketio import SocketIO
+from flask_socketio import send
+from flask_socketio import emit
+from flask_socketio import leave_room
+from flask_socketio import join_room
+from flask_socketio import disconnect
+from flask.sessions import SecureCookieSession
+from flask_restful import Api
+from flask_restful import Resource
+from flask_cors import CORS
+from dotenv import load_dotenv
+
+# from project.models import 
+from project.api import UserAPI
+from project.api import SessionAPI
+from project.api import GameAPI
+from project.api import RoomAPI
 from project.models import db_model
 load_dotenv()
 
 app = Flask(__name__)
-
-# session_cookie = SecureCookieSessionInterface().get_signing_serializer(app)
-
 app.config['SECRET_KEY'] = os.urandom(16).hex()
 app.config['DEBUG']=True
 socketio = SocketIO(app, cors_allowed_origins="*")
@@ -102,34 +116,15 @@ def handle_disconnect():
                 emit('sync',{"status":'waiting'},to=userlist[index-1]['sid'])
             del userlist[index]
             print('-'*20,'\n',userlist,'\n','-'*20)
-            
-            return
         
-
 @socketio.on('chat')
 def handle_chat(data):
     print('sid:',request.sid,data)
     emit('chat',data,broadcast=True)
-    return
 
 @app.route('/')
 def index():
     return 'hello'
-# @socketio.on('debug')
-# def handle_debug(data):
-#     if 'userlist' in data:
-#         emit('debug',{'userlist':json.dumps(userlist)})
-    
-        
-# @app.route('/remove/<string:sid>')
-# def remove_user(sid):
-#     global userlist
-#     disconnect(sid)
-#     for index in range(len(userlist)):
-#         if sid ==userlist[index]['sid']:
-#             del userlist[index]
-#     return '1'
-     
 
 if __name__ == '__main__':
     socketio.run(app,'0.0.0.0',port=5300)

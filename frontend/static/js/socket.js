@@ -19,7 +19,7 @@ socket.on('connect', function () {
   }
 });
 socket.on('sync', function (data) {
-  console.log(data);
+  // console.log(data);
 
   
   if (data.status == 'info') {
@@ -56,8 +56,8 @@ socket.on('sync', function (data) {
     
     
   }else if(data.status=="syncing"){//同步遊戲數據
-    console.log(data);
-    console.log(window);
+    // console.log(data);
+    // console.log(window);
     if (window.player == 1)//main
     {
       window.player2_y=data.player_y;
